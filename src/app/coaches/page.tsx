@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { CoachOrbitCard } from "@/components/coaches/CoachOrbitCard";
 import { Mail, CheckCircle2, ArrowRight, Award } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ const coaches = [
     email: "coachkendra@triiqcoaching.com",
     initials: "KW",
     accentColor: "cyan",
+    imageSrc: "/coaches/kendra.jpg",
     bio: [
       "USAT-certified triathlon coach Kendra Weekley started her journey into triathlon while obtaining her BS in Nutrition and Dietetics. She now practices as a Registered Dietitian with her MS in Exercise Science.",
       "She loves coaching all distances, but has a true passion for short-course racing. Short-course triathlon has given her the opportunity to race for Team USA all over the world. Coach Kendra's favorite discipline is cycling — as you can see so much and go so far on a bike.",
@@ -31,6 +33,11 @@ const coaches = [
       { label: "CISSN — Certified Sports Nutritionist", color: "cyan" },
       { label: "Team USA Athlete", color: "sky" },
     ],
+    stats: [
+      { label: "Certified Sports Nutritionist", value: "CISSN" },
+      { label: "Exercise Science", value: "MS" },
+      { label: "Racing Level", value: "Team USA" },
+    ],
   },
   {
     id: "pete",
@@ -40,6 +47,7 @@ const coaches = [
     email: "coachpete@triiqcoaching.com",
     initials: "PH",
     accentColor: "sky",
+    imageSrc: "/coaches/pete.jpg",
     bio: [
       "Coach Peter Heizer is recognized by the US Olympic National Governing Body as a USA Triathlon Certified Coach; he is an Ironman Certified Coach, a U.S. Masters Swimming Certified Coach, and a TrainingPeaks Certified Coach.",
       "With over 25 years of experience in endurance racing, he has a strong focus on long and ultra-distance competition. As a nine-time Ironman finisher, Coach Pete enjoys drawing on his personal experience to help his athletes achieve their best performance.",
@@ -59,36 +67,37 @@ const coaches = [
       { label: "TrainingPeaks Certified Coach", color: "cyan" },
       { label: "9× Ironman Finisher", color: "sky" },
     ],
+    stats: [
+      { label: "Ironman Finishes", value: "9×" },
+      { label: "Years Racing", value: "25+" },
+      { label: "Certifications", value: "4" },
+    ],
   },
 ];
 
-const accentClasses: Record<string, { text: string; bg: string; border: string; avatar: string }> =
-  {
-    cyan: {
-      text: "text-cyan-400",
-      bg: "bg-cyan-500/10",
-      border: "border-cyan-500/25",
-      avatar: "bg-gradient-to-br from-cyan-400 to-cyan-600",
-    },
-    sky: {
-      text: "text-sky-400",
-      bg: "bg-sky-500/10",
-      border: "border-sky-500/25",
-      avatar: "bg-gradient-to-br from-sky-400 to-sky-600",
-    },
-    teal: {
-      text: "text-teal-400",
-      bg: "bg-teal-500/10",
-      border: "border-teal-500/25",
-      avatar: "bg-gradient-to-br from-teal-400 to-teal-600",
-    },
-  };
+const accentClasses: Record<string, { text: string; bg: string; border: string }> = {
+  cyan: {
+    text: "text-cyan-400",
+    bg: "bg-cyan-500/10",
+    border: "border-cyan-500/25",
+  },
+  sky: {
+    text: "text-sky-400",
+    bg: "bg-sky-500/10",
+    border: "border-sky-500/25",
+  },
+  teal: {
+    text: "text-teal-400",
+    bg: "bg-teal-500/10",
+    border: "border-teal-500/25",
+  },
+};
 
 export default function CoachesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-20 md:pt-40 md:pb-24 hero-gradient relative overflow-hidden">
+      <section className="pt-32 pb-6 md:pt-40 md:pb-8 hero-gradient relative overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-50" />
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <AnimatedSection>
@@ -108,105 +117,34 @@ export default function CoachesPage() {
       </section>
 
       {/* Coach Profiles */}
-      <section className="py-20 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 space-y-20 md:space-y-28">
-          {coaches.map((coach, idx) => {
+      <section className="pt-2 pb-10 md:pt-2 md:pb-16">
+        <div className="max-w-4xl mx-auto px-6 space-y-20 md:space-y-28">
+          {coaches.map((coach) => {
             const accent = accentClasses[coach.accentColor];
-            const flip = idx % 2 !== 0;
 
             return (
-              <div
-                key={coach.id}
-                id={coach.id}
-                className={`grid md:grid-cols-5 gap-10 md:gap-16 items-start ${
-                  flip ? "md:[direction:rtl]" : ""
-                }`}
-              >
-                {/* Left: Avatar + Credentials */}
-                <AnimatedSection
-                  direction={flip ? "left" : "right"}
-                  className="md:col-span-2 md:[direction:ltr]"
-                >
-                  <div className={`p-8 rounded-3xl border ${accent.border} ${accent.bg} gradient-border`}>
-                    {/* Avatar */}
-                    <div className="flex justify-center mb-6">
-                      <div
-                        className={`w-24 h-24 rounded-2xl ${accent.avatar} flex items-center justify-center text-3xl font-black text-white shadow-xl`}
-                      >
-                        {coach.initials}
-                      </div>
-                    </div>
-
-                    <div className="text-center mb-6">
-                      <h2 className={`text-2xl font-black ${accent.text} mb-1`}>
-                        {coach.name}
-                      </h2>
-                      <p className="text-slate-400 text-sm font-medium">
-                        {coach.fullName}
-                      </p>
-                    </div>
-
-                    {/* Credentials */}
-                    <div className="space-y-2 mb-6">
-                      <p className="text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
-                        <Award size={12} />
-                        Certifications
-                      </p>
-                      {coach.credentials.map((cred) => {
-                        const ca = accentClasses[cred.color];
-                        return (
-                          <div
-                            key={cred.label}
-                            className={`flex items-center gap-2 px-3 py-2 rounded-lg ${ca.bg} border ${ca.border} text-xs font-semibold ${ca.text}`}
-                          >
-                            <CheckCircle2 size={12} className="shrink-0" />
-                            {cred.label}
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    {/* Specialties */}
-                    <div className="mb-6">
-                      <p className="text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-3">
-                        Specialties
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {coach.specialties.map((s) => (
-                          <span
-                            key={s}
-                            className="px-2.5 py-1 rounded-full bg-slate-700/60 border border-slate-600/50 text-slate-300 text-xs font-medium"
-                          >
-                            {s}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Contact */}
-                    <a
-                      href={`mailto:${coach.email}`}
-                      className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl font-bold text-sm ${accent.bg} border ${accent.border} ${accent.text} hover:opacity-80 transition-opacity`}
-                    >
-                      <Mail size={15} />
-                      {coach.email}
-                    </a>
-                  </div>
+              <div key={coach.id} id={coach.id}>
+                {/* Orbit visualization — full width, centered */}
+                <AnimatedSection className="-mt-12 -mb-10">
+                  <CoachOrbitCard
+                    coachId={coach.id as "pete" | "kendra"}
+                    initials={coach.initials}
+                    name={coach.name}
+                    accentColor={coach.accentColor as "cyan" | "sky" | "teal"}
+                    size={480}
+                    imageSrc={coach.imageSrc}
+                  />
                 </AnimatedSection>
 
-                {/* Right: Bio */}
-                <AnimatedSection
-                  direction={flip ? "right" : "left"}
-                  delay={0.15}
-                  className="md:col-span-3 md:[direction:ltr]"
-                >
-                  <p className={`text-xs font-bold uppercase tracking-[0.3em] mb-3 ${accent.text}`}>
+                {/* Bio + info below */}
+                <AnimatedSection direction="up" delay={0.1}>
+                  <p className={`text-xs font-bold uppercase tracking-[0.3em] mb-3 text-center ${accent.text}`}>
                     About
                   </p>
-                  <h3 className="text-3xl md:text-4xl font-black text-white mb-2 leading-tight">
+                  <h3 className="text-3xl md:text-4xl font-black text-white mb-2 leading-tight text-center">
                     {coach.name}
                   </h3>
-                  <p className="text-slate-500 font-medium mb-8">{coach.role}</p>
+                  <p className="text-slate-500 font-medium mb-8 text-center">{coach.role}</p>
 
                   <div className="space-y-4 mb-10">
                     {coach.bio.map((paragraph, pi) => (
@@ -217,59 +155,87 @@ export default function CoachesPage() {
                   </div>
 
                   {/* Quick stats */}
-                  {idx === 0 && (
-                    <div className="grid grid-cols-3 gap-4 mb-10">
-                      {[
-                        { label: "Certifications", value: "2+" },
-                        { label: "Disciplines", value: "All 3" },
-                        { label: "Racing Level", value: "Team USA" },
-                      ].map((st) => (
-                        <div
-                          key={st.label}
-                          className="p-4 rounded-xl bg-slate-800/60 border border-slate-700/50 text-center"
-                        >
-                          <div className={`text-2xl font-black mb-1 ${accent.text}`}>
-                            {st.value}
-                          </div>
-                          <div className="text-slate-500 text-xs font-medium">{st.label}</div>
+                  <div className="grid grid-cols-3 gap-4 mb-10">
+                    {coach.stats.map((st) => (
+                      <div
+                        key={st.label}
+                        className="p-4 rounded-xl bg-slate-800/60 border border-slate-700/50 text-center"
+                      >
+                        <div className={`text-2xl font-black mb-1 ${accent.text}`}>
+                          {st.value}
                         </div>
-                      ))}
-                    </div>
-                  )}
-                  {idx === 1 && (
-                    <div className="grid grid-cols-3 gap-4 mb-10">
-                      {[
-                        { label: "Ironman Finishes", value: "9×" },
-                        { label: "Years Racing", value: "25+" },
-                        { label: "Certifications", value: "4" },
-                      ].map((st) => (
-                        <div
-                          key={st.label}
-                          className="p-4 rounded-xl bg-slate-800/60 border border-slate-700/50 text-center"
-                        >
-                          <div className={`text-2xl font-black mb-1 ${accent.text}`}>
-                            {st.value}
-                          </div>
-                          <div className="text-slate-500 text-xs font-medium">{st.label}</div>
+                        <div className="text-slate-500 text-xs font-medium">
+                          {st.label}
                         </div>
-                      ))}
-                    </div>
-                  )}
+                      </div>
+                    ))}
+                  </div>
 
-                  <a
-                    href={`mailto:${coach.email}`}
-                    className={`group inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-slate-950 transition-all duration-200 hover:shadow-lg active:scale-95 ${
-                      coach.accentColor === "cyan"
-                        ? "bg-cyan-500 hover:bg-cyan-400 hover:shadow-cyan-500/30"
-                        : "bg-sky-500 hover:bg-sky-400 hover:shadow-sky-500/30"
-                    }`}
+                  {/* Credentials */}
+                  <div
+                    className={`p-5 rounded-2xl border ${accent.border} ${accent.bg} gradient-border mb-8`}
                   >
-                    Train with {coach.name}
-                    <ArrowRight
-                      size={15}
-                      className="group-hover:translate-x-1 transition-transform"
-                    />
-                  </a>
+                    <div className="space-y-1.5 mb-4">
+                      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-2 flex items-center gap-1.5">
+                        <Award size={10} />
+                        Certifications
+                      </p>
+                      {coach.credentials.map((cred) => {
+                        const ca = accentClasses[cred.color];
+                        return (
+                          <div
+                            key={cred.label}
+                            className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg ${ca.bg} border ${ca.border} text-[11px] font-semibold ${ca.text}`}
+                          >
+                            <CheckCircle2 size={10} className="shrink-0" />
+                            {cred.label}
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Specialties */}
+                    <div>
+                      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-2">
+                        Specialties
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {coach.specialties.map((s) => (
+                          <span
+                            key={s}
+                            className="px-2 py-0.5 rounded-full bg-slate-700/60 border border-slate-600/50 text-slate-300 text-[10px] font-medium"
+                          >
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* CTAs */}
+                  <div className="flex flex-col sm:flex-row gap-3 items-center">
+                    <a
+                      href={`mailto:${coach.email}`}
+                      className={`group inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-slate-950 transition-all duration-200 hover:shadow-lg active:scale-95 ${
+                        coach.accentColor === "cyan"
+                          ? "bg-cyan-500 hover:bg-cyan-400 hover:shadow-cyan-500/30"
+                          : "bg-sky-500 hover:bg-sky-400 hover:shadow-sky-500/30"
+                      }`}
+                    >
+                      Train with {coach.name}
+                      <ArrowRight
+                        size={15}
+                        className="group-hover:translate-x-1 transition-transform"
+                      />
+                    </a>
+                    <a
+                      href={`mailto:${coach.email}`}
+                      className={`flex items-center gap-2 px-5 py-3 rounded-full font-bold text-xs ${accent.bg} border ${accent.border} ${accent.text} hover:opacity-80 transition-opacity`}
+                    >
+                      <Mail size={13} />
+                      {coach.email}
+                    </a>
+                  </div>
                 </AnimatedSection>
               </div>
             );

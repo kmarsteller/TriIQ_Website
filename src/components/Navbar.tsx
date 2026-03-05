@@ -80,6 +80,33 @@ export function Navbar() {
           >
             Get Started
           </a>
+          {/* ── Social Icons ── */}
+          <div className="flex items-center gap-3 ml-1 pl-4 border-l border-slate-700/60">
+            <a
+              href="https://www.instagram.com/triiqcoaching/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TriIQ on Instagram"
+              className="text-slate-400 hover:text-cyan-400 transition-colors"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+            <a
+              href="https://www.facebook.com/triiqcoaching"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TriIQ on Facebook"
+              className="text-slate-400 hover:text-cyan-400 transition-colors"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+          </div>
         </div>
 
         {/* ── Mobile Toggle ── */}
@@ -155,6 +182,37 @@ export function Navbar() {
                   className="block text-center py-3.5 bg-cyan-500 text-slate-950 font-bold rounded-full text-base"
                 >
                   Get Started Today
+                </a>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.28 }}
+                className="flex justify-center gap-6 mt-5 pt-4 border-t border-slate-800"
+              >
+                <a
+                  href="https://www.instagram.com/triiqcoaching/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TriIQ on Instagram"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/>
+                  </svg>
+                </a>
+                <a
+                  href="https://www.facebook.com/triiqcoaching"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TriIQ on Facebook"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                  </svg>
                 </a>
               </motion.div>
             </div>

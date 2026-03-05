@@ -38,15 +38,16 @@ const week = [
 ];
 
 // Sequential reveal order: [dayIndex, workoutIndex]
+// Sweep across the top row (wi=0) left→right first, then second row (wi=1) left→right
 const revealOrder: [number, number][] = [
-  [0, 0], // Mon: Swim
+  [0, 0], // Mon: Swim        ← row 1 sweep →
   [1, 0], // Tue: Bike
   [2, 0], // Wed: Run
-  [2, 1], // Wed: Swim (double)
   [4, 0], // Fri: Bike Intervals
   [5, 0], // Sat: Long Ride
-  [5, 1], // Sat: Brick Run
   [6, 0], // Sun: Long Run
+  [2, 1], // Wed: Swim (double)  ← row 2 sweep →
+  [5, 1], // Sat: Brick Run
 ];
 
 const INTERVAL_MS = 420;

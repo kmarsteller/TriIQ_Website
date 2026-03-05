@@ -239,6 +239,9 @@ export default function HomePage() {
                   "Ironman Certified",
                   "US Masters Swimming",
                   "TrainingPeaks Certified",
+                  "Team USA Athlete",
+                  "MS, Exercise Science",
+                  "CISSN Sports Nutritionist",
                 ].map((badge) => (
                   <span
                     key={badge}
@@ -261,12 +264,12 @@ export default function HomePage() {
                   },
                   {
                     label: "Weekly Check-ins",
-                    value: "Every",
+                    value: "Not a number",
                     desc: "Consistent communication",
                   },
                   {
                     label: "Race Experience",
-                    value: "25+",
+                    value: "40+",
                     desc: "Years of competing",
                   },
                   {
