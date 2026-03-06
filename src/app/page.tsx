@@ -264,13 +264,13 @@ export default function HomePage() {
                   },
                   {
                     label: "Weekly Check-ins",
-                    value: "Not a number",
+                    value: "1:1",
                     desc: "Consistent communication",
                   },
                   {
-                    label: "Race Experience",
-                    value: "40+ Years",
-                    desc: "Years of competing",
+                    label: "Years Competing",
+                    value: "40+",
+                    desc: "Racing and coaching experience",
                   },
                   {
                     label: "Ironman Finishes",
