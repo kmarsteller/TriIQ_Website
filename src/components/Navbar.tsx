@@ -86,7 +86,7 @@ export function Navbar() {
           <img
             src="/triiq-logo.png"
             alt="Tri IQ Coaching — Train Smarter"
-            className="h-8 md:h-10 w-auto transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]"
+            className="h-10 md:h-12 w-auto transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]"
             style={{ filter: "invert(1) hue-rotate(180deg)" }}
           />
         </Link>

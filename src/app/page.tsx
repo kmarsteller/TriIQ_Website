@@ -269,7 +269,7 @@ export default function HomePage() {
                   },
                   {
                     label: "Race Experience",
-                    value: "40+",
+                    value: "40+ Years",
                     desc: "Years of competing",
                   },
                   {
