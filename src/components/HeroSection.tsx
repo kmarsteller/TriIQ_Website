@@ -151,8 +151,8 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.75 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-14"
         >
-          <a
-            href="mailto:coachpete@triiqcoaching.com"
+          <Link
+            href="/contact"
             className="group flex items-center gap-2 px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-base rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-cyan-500/40 active:scale-95"
           >
             Get Started Today
@@ -160,7 +160,7 @@ export function HeroSection() {
               size={18}
               className="group-hover:translate-x-1 transition-transform"
             />
-          </a>
+          </Link>
           <Link
             href="/coaches"
             className="flex items-center gap-2 px-8 py-4 border border-white/30 hover:border-cyan-400/60 text-white font-semibold text-base rounded-full transition-all duration-200 hover:bg-white/10 backdrop-blur-sm active:scale-95"

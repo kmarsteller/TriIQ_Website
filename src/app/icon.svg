@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Dark navy background -->
+  <rect width="100" height="100" fill="#0f172a" rx="12"/>
+
+  <!--
+    All three triangles share the same orientation:
+    right-angle at LOWER-LEFT, apex pointing UPPER-RIGHT.
+    They stack diagonally (dark lower-left → blue center → accent upper-right).
+
+    Derived from pixel sampling of the original 1200x384 logo PNG.
+    Original coords → normalized to 100x100 viewBox (origin=820,60; scale=0.4/px):
+
+    Dark:   apex(820,140) → (2,32)   | RA(820,310) → (2,100) | BR(980,310) → (66,100)
+    Blue:   apex(880,100) → (26,16)  | RA(880,270) → (26,84) | BR(1050,270) → (94,84)
+    Accent: apex(1000,60) → (74,0)   | RA(1000,130) → (74,28)| BR(1060,130) → (98,28)
+  -->
+
+  <!-- Dark charcoal triangle -->
+  <polygon points="2,32 2,100 66,100" fill="#2e3d4f"/>
+
+  <!-- Main steel-blue triangle -->
+  <polygon points="26,16 26,84 94,84" fill="#5ab3d8"/>
+
+  <!-- Small lighter-blue accent -->
+  <polygon points="74,0 74,28 98,28" fill="#8ecde8"/>
+</svg>

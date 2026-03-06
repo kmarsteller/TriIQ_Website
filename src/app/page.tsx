@@ -317,8 +317,8 @@ export default function HomePage() {
               gets you to the finish line.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="mailto:coachpete@triiqcoaching.com"
+              <Link
+                href="/contact"
                 className="group flex items-center justify-center gap-2 px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-base rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-cyan-500/30 active:scale-95"
               >
                 Contact a Coach
@@ -326,7 +326,7 @@ export default function HomePage() {
                   size={18}
                   className="group-hover:translate-x-1 transition-transform"
                 />
-              </a>
+              </Link>
               <Link
                 href="/coaching"
                 className="flex items-center justify-center px-8 py-4 border border-slate-600 hover:border-cyan-500/50 text-slate-300 hover:text-white font-semibold text-base rounded-full transition-all duration-200 hover:bg-slate-800/50"

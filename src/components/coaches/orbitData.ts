@@ -70,9 +70,9 @@ export const orbitData: Record<"pete" | "kendra", OrbitItem[]> = {
     },
     {
       id: "experience",
-      label: "25+ Years",
+      label: "40+ Years",
       icon: Clock,
-      title: "25+ Years Racing",
+      title: "40+ Years Racing",
       description: "Over two decades of endurance sport experience",
       imageSrc: "/coaches/pete/experience.jpg",
     },

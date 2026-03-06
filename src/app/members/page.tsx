@@ -146,12 +146,12 @@ const partners: Partner[] = [
     logo: "/partners/zym.avif",
     category: "Hydration",
     accent: {
-      text: "text-violet-400",
-      bg: "bg-violet-500/8",
-      border: "border-violet-500/25",
-      badge: "bg-violet-500",
+      text: "text-red-400",
+      bg: "bg-red-500/8",
+      border: "border-red-500/25",
+      badge: "bg-red-500",
       badgeText: "text-white",
-      glow: "shadow-violet-500/20",
+      glow: "shadow-red-500/20",
     },
   },
   {
@@ -167,12 +167,12 @@ const partners: Partner[] = [
     logo: "/partners/ncm.png",
     category: "Local Partner",
     accent: {
-      text: "text-sky-400",
-      bg: "bg-sky-500/8",
-      border: "border-sky-500/25",
-      badge: "bg-sky-500",
-      badgeText: "text-white",
-      glow: "shadow-sky-500/20",
+      text: "text-yellow-400",
+      bg: "bg-yellow-500/8",
+      border: "border-yellow-500/25",
+      badge: "bg-yellow-500",
+      badgeText: "text-slate-950",
+      glow: "shadow-yellow-500/20",
     },
   },
 ];
@@ -182,8 +182,9 @@ const partners: Partner[] = [
 interface Race {
   id: string;
   name: string;
-  date: string;
-  month: string;
+  date: string;   // display string, e.g. "May 31" or "7–9"
+  month: string;  // 3-letter all-caps, e.g. "MAY"
+  day: string;    // day of week, e.g. "Sun" or "Fri–Sun"
   location: string;
   distances: string[];
   url: string;
@@ -194,87 +195,86 @@ const races: Race[] = [
   {
     id: "buckeye",
     name: "Buckeye Triathlon",
-    date: "May 4",
+    date: "May 31",
     month: "MAY",
-    location: "Powell, OH",
+    day: "Sun",
+    location: "Waynesville, OH",
     distances: ["Sprint", "Olympic"],
-    url: "https://buckeyetriathlon.com",
-  },
-  {
-    id: "giant-eagle",
-    name: "Giant Eagle Triathlon",
-    date: "May 18",
-    month: "MAY",
-    location: "Westlake, OH",
-    distances: ["Sprint"],
-    url: "https://www.gianteagletriathlon.com",
-  },
-  {
-    id: "cleveland",
-    name: "Cleveland Triathlon",
-    date: "Jun 8",
-    month: "JUN",
-    location: "Cleveland, OH",
-    distances: ["Sprint", "Olympic"],
-    url: "https://www.clevelandtriathlon.com",
-    featured: true,
-  },
-  {
-    id: "steelhead",
-    name: "IRONMAN 70.3 Steelhead",
-    date: "Jun 28",
-    month: "JUN",
-    location: "Benton Harbor, MI",
-    distances: ["70.3"],
-    url: "https://www.ironman.com/im703-steelhead",
-    featured: true,
+    url: "https://hfpracing.com/race/great-buckeye-challenge-triathlon-duathlon-aquabike-at-caesar-creek-state-park/",
   },
   {
     id: "maumee",
     name: "Maumee Bay Triathlon",
-    date: "Jul 13",
-    month: "JUL",
+    date: "Jun 14",
+    month: "JUN",
+    day: "Sun",
     location: "Oregon, OH",
     distances: ["Sprint", "Olympic"],
-    url: "https://www.maumeebaymarathon.com",
+    url: "https://hfpracing.com/race/maumee-bay-triathlon-duathlon-aquabike/",
+  },
+  {
+    id: "cleveland",
+    name: "Tri CLE Rock Roll Run",
+    date: "Aug 16",
+    month: "AUG",
+    day: "Sun",
+    location: "Cleveland, OH",
+    distances: ["Sprint", "Olympic"],
+    url: "https://www.rockrollrun.com",
+    featured: true,
+  },
+  {
+    id: "imoh",
+    name: "IRONMAN Ohio 70.3",
+    date: "Jul 19",
+    month: "JUL",
+    day: "Sun",
+    location: "Sandusky, OH",
+    distances: ["70.3"],
+    url: "https://www.ironman.com/im703-ohio",
+    featured: true,
   },
   {
     id: "lakeplacid",
     name: "IRONMAN Lake Placid",
-    date: "Jul 20",
+    date: "Jul 19",
     month: "JUL",
+    day: "Sun",
     location: "Lake Placid, NY",
     distances: ["Full"],
     url: "https://www.ironman.com/im-lake-placid",
     featured: true,
   },
   {
-    id: "rev3",
-    name: "REV3 Sandusky",
-    date: "Aug 3",
+    id: "nationals",
+    name: "USAT Age Group Nationals",
+    date: "7–9",
     month: "AUG",
+    day: "Fri–Sun",
+    location: "Milwaukee, WI",
+    distances: ["Sprint", "Olympic"],
+    url: "https://www.usatriathlon.org/2026-usa-triathlon-nationals",
+    featured: true,
+  },
+  {
+    id: "rev3",
+    name: "REV3 Cedar Point",
+    date: "Sep 10",
+    month: "SEP",
+    day: "Thu",
     location: "Sandusky, OH",
     distances: ["Sprint", "Olympic", "Full"],
     url: "https://www.rev3tri.com",
   },
   {
-    id: "nationals",
-    name: "USAT Age Group Nationals",
-    date: "Aug 14–17",
-    month: "AUG",
-    location: "Auburn, AL",
-    distances: ["Sprint", "Olympic"],
-    url: "https://www.usatriathlon.org/events/nationals",
-    featured: true,
-  },
-  {
     id: "kona",
     name: "IRONMAN World Championship",
-    date: "Oct 11",
+    date: "Oct 10",
     month: "OCT",
+    day: "Sat",
     location: "Kailua-Kona, HI",
     distances: ["Full"],
-    url: "https://www.ironman.com/im-world-championship",
+    url: "https://www.ironman.com/races/im-world-championship-kona",
     featured: true,
   },
 ];
@@ -505,10 +505,10 @@ export default function MembersPage() {
                 <div>
                   <div className="mb-10">
                     <h2 className="text-2xl md:text-3xl font-black text-white mb-2">
-                      2025 Race Calendar
+                      2026 Race Calendar
                     </h2>
                     <p className="text-slate-400 text-sm leading-relaxed max-w-2xl">
-                      Key races on the Tri IQ radar for the 2025 season. Check each race&apos;s
+                      Key races on the Tri IQ radar for the 2026 season. Check each race&apos;s
                       official site for current registration status and date confirmation.
                     </p>
                   </div>
@@ -530,14 +530,17 @@ export default function MembersPage() {
                         }`}
                       >
                         {/* Month badge */}
-                        <div className={`shrink-0 w-14 h-14 rounded-xl flex flex-col items-center justify-center text-center ${
+                        <div className={`shrink-0 w-14 h-16 rounded-xl flex flex-col items-center justify-center text-center gap-0.5 ${
                           race.featured ? "bg-cyan-500/15 border border-cyan-500/30" : "bg-slate-800/60 border border-slate-700/50"
                         }`}>
-                          <span className={`text-[9px] font-black uppercase tracking-wider ${race.featured ? "text-cyan-400" : "text-slate-500"}`}>
+                          <span className={`text-[9px] font-black uppercase tracking-wider leading-none ${race.featured ? "text-cyan-400" : "text-slate-500"}`}>
                             {race.month}
                           </span>
-                          <span className="text-xs font-black text-white leading-tight">
+                          <span className="text-sm font-black text-white leading-none">
                             {race.date.includes("–") ? race.date.split("–")[0] : race.date.replace(/[A-Za-z\s]/g, "")}
+                          </span>
+                          <span className={`text-[9px] font-semibold leading-none ${race.featured ? "text-cyan-400/70" : "text-slate-500"}`}>
+                            {race.day}
                           </span>
                         </div>
 

@@ -38,6 +38,7 @@ const coaches = [
       { label: "Exercise Science", value: "MS" },
       { label: "Racing Level", value: "Team USA" },
     ],
+    usatUrl: "https://member.usatriathlon.org/coach/1239",
   },
   {
     id: "pete",
@@ -69,9 +70,10 @@ const coaches = [
     ],
     stats: [
       { label: "Ironman Finishes", value: "9×" },
-      { label: "Years Racing", value: "25+" },
+      { label: "Years Racing", value: "40+" },
       { label: "Certifications", value: "4" },
     ],
+    usatUrl: "https://member.usatriathlon.org/coach/400",
   },
 ];
 
@@ -235,6 +237,19 @@ export default function CoachesPage() {
                       <Mail size={13} />
                       {coach.email}
                     </a>
+                    {"usatUrl" in coach && coach.usatUrl && (
+                      <a
+                        href={coach.usatUrl as string}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-5 py-3 rounded-full bg-slate-800/60 border border-slate-700/50 hover:border-cyan-500/40 transition-all"
+                      >
+                        <span className="text-slate-300 font-bold text-xs">{coach.name}</span>
+                        <span className="text-slate-500 text-xs">@</span>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/usat-main-logo.svg" alt="USA Triathlon" className="h-3.5 w-auto" />
+                      </a>
+                    )}
                   </div>
                 </AnimatedSection>
               </div>

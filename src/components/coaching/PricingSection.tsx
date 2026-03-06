@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useInView, useAnimation, AnimatePresence } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import {
@@ -29,7 +30,7 @@ const plans = [
     bg: "bg-cyan-500/10",
     ring: "ring-cyan-500/30",
     desc: "Full triathlon coaching — swim, bike, and run — with everything you need to race your best.",
-    cta: "mailto:coachpete@triiqcoaching.com",
+    cta: "/contact",
   },
   {
     id: "run",
@@ -46,7 +47,7 @@ const plans = [
     bg: "bg-teal-500/10",
     ring: "ring-teal-500/30",
     desc: "Expert run coaching for marathons, ultras, and endurance events with full athlete support.",
-    cta: "mailto:coachpete@triiqcoaching.com",
+    cta: "/contact",
   },
 ];
 
@@ -204,7 +205,7 @@ export function PricingSection() {
                 </ul>
 
                 {/* CTA */}
-                <a
+                <Link
                   href={plan.cta}
                   className={`group flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-sm transition-all duration-200 active:scale-95 ${
                     pi === 0
@@ -214,7 +215,7 @@ export function PricingSection() {
                 >
                   Get Started
                   <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
-                </a>
+                </Link>
               </div>
             </motion.div>
           ))}

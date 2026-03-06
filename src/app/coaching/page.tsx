@@ -130,13 +130,13 @@ export default function CoachingPage() {
               Consistent, sustainable, and balanced training built around you —
               your schedule, your goals, your race.
             </p>
-            <a
-              href="mailto:coachpete@triiqcoaching.com"
+            <Link
+              href="/contact"
               className="inline-flex items-center gap-2 px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-cyan-500/30 active:scale-95"
             >
               Get Started
               <ArrowRight size={18} />
-            </a>
+            </Link>
           </AnimatedSection>
         </div>
       </section>

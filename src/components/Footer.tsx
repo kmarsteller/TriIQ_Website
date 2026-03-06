@@ -73,6 +73,14 @@ export function Footer() {
               >
                 Instagram
               </a>
+              <a
+                href="https://discord.gg/2k9FGxmFg4"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-500 hover:text-cyan-400 transition-colors text-sm font-semibold"
+              >
+                Discord
+              </a>
             </div>
           </div>
 
