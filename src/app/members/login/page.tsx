@@ -39,7 +39,7 @@ function LoginForm() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 hero-gradient relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center px-4 hero-gradient relative overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-40" />
 
       {/* Logo / back to home */}
@@ -91,6 +91,7 @@ function LoginForm() {
                 placeholder="Team password"
                 required
                 autoFocus
+                autoComplete="current-password"
                 className="w-full px-4 py-3.5 pr-12 bg-slate-800/60 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/60 focus:bg-slate-800/80 transition-all text-sm"
               />
               <button
@@ -138,7 +139,7 @@ function LoginForm() {
           </p>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 

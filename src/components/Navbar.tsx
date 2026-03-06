@@ -121,7 +121,7 @@ export function Navbar() {
                 isEventsActive ? "text-cyan-400" : "text-slate-300 hover:text-white"
               }`}
             >
-              Events
+              Community
               <ChevronDown
                 size={14}
                 className={`transition-transform duration-200 ${eventsOpen ? "rotate-180" : ""}`}
@@ -300,7 +300,7 @@ export function Navbar() {
                     isEventsActive ? "text-cyan-400" : "text-slate-300"
                   }`}
                 >
-                  Events
+                  Community
                   <ChevronDown
                     size={16}
                     className={`transition-transform duration-200 ${mobileEventsOpen ? "rotate-180" : ""}`}
