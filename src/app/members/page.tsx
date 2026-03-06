@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { RaceCountdown } from "@/components/RaceCountdown";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import {
@@ -182,22 +183,42 @@ const partners: Partner[] = [
 interface Race {
   id: string;
   name: string;
-  date: string;   // display string, e.g. "May 31" or "7–9"
-  month: string;  // 3-letter all-caps, e.g. "MAY"
-  day: string;    // day of week, e.g. "Sun" or "Fri–Sun"
+  date: string;     // display string, e.g. "May 31" or "7–9"
+  month: string;    // 3-letter all-caps, e.g. "MAY"
+  day: string;      // day of week, e.g. "Sun" or "Fri–Sun"
+  isoDate: string;  // "YYYY-MM-DD" for date comparison, or "TBD"
   location: string;
   distances: string[];
   url: string;
   featured?: boolean;
 }
 
+function isRacePast(isoDate: string): boolean {
+  if (isoDate === "TBD") return false;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return new Date(isoDate) < today;
+}
+
 const races: Race[] = [
+  {
+    id: "in-like-a-lion",
+    name: "In Like a Lion Run",
+    date: "Mar 1",
+    month: "MAR",
+    day: "Sun",
+    isoDate: "2026-03-01",
+    location: "Sagamore Hills, OH",
+    distances: ["Run"],
+    url: "#",
+  },
   {
     id: "buckeye",
     name: "Buckeye Triathlon",
     date: "May 31",
     month: "MAY",
     day: "Sun",
+    isoDate: "2026-05-31",
     location: "Waynesville, OH",
     distances: ["Sprint", "Olympic"],
     url: "https://hfpracing.com/race/great-buckeye-challenge-triathlon-duathlon-aquabike-at-caesar-creek-state-park/",
@@ -208,20 +229,21 @@ const races: Race[] = [
     date: "Jun 14",
     month: "JUN",
     day: "Sun",
+    isoDate: "2026-06-14",
     location: "Oregon, OH",
     distances: ["Sprint", "Olympic"],
     url: "https://hfpracing.com/race/maumee-bay-triathlon-duathlon-aquabike/",
   },
   {
-    id: "cleveland",
-    name: "Tri CLE Rock Roll Run",
-    date: "Aug 16",
-    month: "AUG",
+    id: "rockford",
+    name: "IRONMAN 70.3 Rockford",
+    date: "Jun 14",
+    month: "JUN",
     day: "Sun",
-    location: "Cleveland, OH",
-    distances: ["Sprint", "Olympic"],
-    url: "https://www.rockrollrun.com",
-    featured: true,
+    isoDate: "2026-06-14",
+    location: "Rockford, IL",
+    distances: ["70.3"],
+    url: "https://www.ironman.com/races/im703-rockford-illinois",
   },
   {
     id: "imoh",
@@ -229,6 +251,7 @@ const races: Race[] = [
     date: "Jul 19",
     month: "JUL",
     day: "Sun",
+    isoDate: "2026-07-19",
     location: "Sandusky, OH",
     distances: ["70.3"],
     url: "https://www.ironman.com/im703-ohio",
@@ -240,9 +263,22 @@ const races: Race[] = [
     date: "Jul 19",
     month: "JUL",
     day: "Sun",
+    isoDate: "2026-07-19",
     location: "Lake Placid, NY",
     distances: ["Full"],
     url: "https://www.ironman.com/im-lake-placid",
+    featured: true,
+  },
+  {
+    id: "cleveland",
+    name: "Tri CLE Rock Roll Run",
+    date: "Aug 16",
+    month: "AUG",
+    day: "Sun",
+    isoDate: "2026-08-16",
+    location: "Cleveland, OH",
+    distances: ["Sprint", "Olympic"],
+    url: "https://www.rockrollrun.com",
     featured: true,
   },
   {
@@ -251,6 +287,7 @@ const races: Race[] = [
     date: "7–9",
     month: "AUG",
     day: "Fri–Sun",
+    isoDate: "2026-08-07",
     location: "Milwaukee, WI",
     distances: ["Sprint", "Olympic"],
     url: "https://www.usatriathlon.org/2026-usa-triathlon-nationals",
@@ -262,6 +299,7 @@ const races: Race[] = [
     date: "Sep 10",
     month: "SEP",
     day: "Thu",
+    isoDate: "2026-09-10",
     location: "Sandusky, OH",
     distances: ["Sprint", "Olympic", "Full"],
     url: "https://www.rev3tri.com",
@@ -272,6 +310,7 @@ const races: Race[] = [
     date: "Oct 10",
     month: "OCT",
     day: "Sat",
+    isoDate: "2026-10-10",
     location: "Kailua-Kona, HI",
     distances: ["Full"],
     url: "https://www.ironman.com/races/im-world-championship-kona",
@@ -503,7 +542,7 @@ export default function MembersPage() {
               {/* ── RACE CALENDAR ── */}
               {activeTab === "calendar" && (
                 <div>
-                  <div className="mb-10">
+                  <div className="mb-8">
                     <h2 className="text-2xl md:text-3xl font-black text-white mb-2">
                       2026 Race Calendar
                     </h2>
@@ -513,8 +552,13 @@ export default function MembersPage() {
                     </p>
                   </div>
 
+                  {/* Countdown to next race */}
+                  <RaceCountdown races={races} />
+
                   <div className="space-y-3">
-                    {races.map((race, i) => (
+                    {races.map((race, i) => {
+                      const past = isRacePast(race.isoDate);
+                      return (
                       <motion.a
                         key={race.id}
                         href={race.url}
@@ -523,23 +567,32 @@ export default function MembersPage() {
                         initial={{ opacity: 0, x: -16 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: i * 0.05 }}
-                        className={`group flex items-center gap-4 p-4 md:p-5 rounded-2xl border transition-all duration-200 hover:bg-slate-800/60 ${
-                          race.featured
-                            ? "border-cyan-500/30 bg-slate-900/60"
-                            : "border-slate-800/60 bg-slate-900/30"
+                        className={`group flex items-center gap-4 p-4 md:p-5 rounded-2xl border transition-all duration-200 relative overflow-hidden ${
+                          past
+                            ? "border-slate-700/30 bg-slate-950/40 opacity-60 hover:opacity-80"
+                            : race.featured
+                            ? "border-cyan-500/30 bg-slate-900/60 hover:bg-slate-800/60"
+                            : "border-slate-800/60 bg-slate-900/30 hover:bg-slate-800/60"
                         }`}
+                        style={past ? {
+                          backgroundImage: "repeating-linear-gradient(-45deg, transparent, transparent 6px, rgba(255,255,255,0.07) 6px, rgba(255,255,255,0.07) 7px), repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(255,255,255,0.07) 6px, rgba(255,255,255,0.07) 7px)",
+                        } : undefined}
                       >
                         {/* Month badge */}
                         <div className={`shrink-0 w-14 h-16 rounded-xl flex flex-col items-center justify-center text-center gap-0.5 ${
-                          race.featured ? "bg-cyan-500/15 border border-cyan-500/30" : "bg-slate-800/60 border border-slate-700/50"
+                          past
+                            ? "bg-slate-800/40 border border-slate-700/30"
+                            : race.featured
+                            ? "bg-cyan-500/15 border border-cyan-500/30"
+                            : "bg-slate-800/60 border border-slate-700/50"
                         }`}>
-                          <span className={`text-[9px] font-black uppercase tracking-wider leading-none ${race.featured ? "text-cyan-400" : "text-slate-500"}`}>
+                          <span className={`text-[9px] font-black uppercase tracking-wider leading-none ${past ? "text-slate-600" : race.featured ? "text-cyan-400" : "text-slate-500"}`}>
                             {race.month}
                           </span>
-                          <span className="text-sm font-black text-white leading-none">
+                          <span className={`text-sm font-black leading-none ${past ? "text-slate-500" : "text-white"}`}>
                             {race.date.includes("–") ? race.date.split("–")[0] : race.date.replace(/[A-Za-z\s]/g, "")}
                           </span>
-                          <span className={`text-[9px] font-semibold leading-none ${race.featured ? "text-cyan-400/70" : "text-slate-500"}`}>
+                          <span className={`text-[9px] font-semibold leading-none ${past ? "text-slate-600" : race.featured ? "text-cyan-400/70" : "text-slate-500"}`}>
                             {race.day}
                           </span>
                         </div>
@@ -547,8 +600,13 @@ export default function MembersPage() {
                         {/* Info */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1 flex-wrap">
-                            <span className="text-white font-bold text-sm truncate">{race.name}</span>
-                            {race.featured && (
+                            <span className={`font-bold text-sm truncate ${past ? "text-slate-500 line-through decoration-slate-600" : "text-white"}`}>{race.name}</span>
+                            {past && (
+                              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[9px] font-bold uppercase tracking-wider">
+                                ✓ Done
+                              </span>
+                            )}
+                            {!past && race.featured && (
                               <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-500/25 text-cyan-400 text-[9px] font-bold uppercase tracking-wider">
                                 <Star size={7} fill="currentColor" />
                                 Key Race
@@ -563,7 +621,7 @@ export default function MembersPage() {
                             {race.distances.map((d) => (
                               <span
                                 key={d}
-                                className={`px-2 py-0.5 rounded-full border text-[10px] font-bold ${distanceBadge[d] ?? "bg-slate-700/60 text-slate-300 border-slate-600/50"}`}
+                                className={`px-2 py-0.5 rounded-full border text-[10px] font-bold ${past ? "bg-slate-800/40 text-slate-600 border-slate-700/30" : distanceBadge[d] ?? "bg-slate-700/60 text-slate-300 border-slate-600/50"}`}
                               >
                                 {d}
                               </span>
@@ -577,7 +635,8 @@ export default function MembersPage() {
                           className="text-slate-600 group-hover:text-cyan-400 group-hover:translate-x-0.5 transition-all shrink-0"
                         />
                       </motion.a>
-                    ))}
+                    );
+                    })}
                   </div>
 
                   <p className="mt-6 text-xs text-slate-600 text-center">
