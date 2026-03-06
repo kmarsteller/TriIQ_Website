@@ -6,6 +6,16 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM = "Tri IQ Coaching <noreply@triiqcoaching.com>";
 const COACH_EMAIL = "coachpete@triiqcoaching.com";
 
+/** Escape HTML special characters to prevent XSS in email templates. */
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -48,6 +58,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Sanitize all user input before inserting into HTML
+    const s = {
+      name: escapeHtml(name),
+      email: escapeHtml(email),
+      phone: phone ? escapeHtml(phone) : "—",
+      interest: escapeHtml(interest),
+      fitnessLevel: escapeHtml(fitnessLevel),
+      goalRace: goalRace ? escapeHtml(goalRace) : "—",
+      targetDate: targetDate ? escapeHtml(targetDate) : "—",
+      referral: referral ? escapeHtml(referral) : "—",
+      notes: notes ? escapeHtml(notes) : "",
+    };
+
     // ── Coach notification email ──────────────────────────────────────────────
 
     const coachHtml = `
@@ -78,19 +101,19 @@ export async function POST(request: NextRequest) {
     </div>
     <div class="body">
       <table>
-        <tr><td>Name</td><td>${name}</td></tr>
-        <tr><td>Email</td><td><a href="mailto:${email}" style="color:#22d3ee">${email}</a></td></tr>
-        <tr><td>Phone</td><td>${phone || "—"}</td></tr>
-        <tr><td>Coaching Interest</td><td>${interest}</td></tr>
-        <tr><td>Fitness Level</td><td>${fitnessLevel}</td></tr>
-        <tr><td>Goal Race / Event</td><td>${goalRace || "—"}</td></tr>
-        <tr><td>Target Date</td><td>${targetDate || "—"}</td></tr>
-        <tr><td>How They Found Us</td><td>${referral || "—"}</td></tr>
+        <tr><td>Name</td><td>${s.name}</td></tr>
+        <tr><td>Email</td><td><a href="mailto:${s.email}" style="color:#22d3ee">${s.email}</a></td></tr>
+        <tr><td>Phone</td><td>${s.phone}</td></tr>
+        <tr><td>Coaching Interest</td><td>${s.interest}</td></tr>
+        <tr><td>Fitness Level</td><td>${s.fitnessLevel}</td></tr>
+        <tr><td>Goal Race / Event</td><td>${s.goalRace}</td></tr>
+        <tr><td>Target Date</td><td>${s.targetDate}</td></tr>
+        <tr><td>How They Found Us</td><td>${s.referral}</td></tr>
       </table>
       ${
-        notes
+        s.notes
           ? `<p style="color:#94a3b8;font-size:13px;font-weight:600;margin:20px 0 6px;">Additional Notes</p>
-             <div class="notes">${notes}</div>`
+             <div class="notes">${s.notes}</div>`
           : ""
       }
     </div>
@@ -123,12 +146,12 @@ export async function POST(request: NextRequest) {
   <div class="wrapper">
     <div class="card">
       <div class="logo">Tri IQ</div>
-      <h2>We got your info, ${name.split(" ")[0]}! 👋</h2>
+      <h2>We got your info, ${escapeHtml(name.split(" ")[0])}! 👋</h2>
       <p>Thanks for reaching out. Coach Pete will review your intake and get back to you within <span class="highlight">24–48 hours</span> to talk next steps.</p>
       <p>In the meantime, feel free to check out the <a href="https://triiqcoaching.com/coaching" style="color:#22d3ee">coaching services page</a> or <a href="https://triiqcoaching.com/coaches" style="color:#22d3ee">meet the coaches</a>.</p>
       <hr class="divider" />
       <p style="font-size:13px;">What you submitted:</p>
-      <p style="font-size:13px;margin:0;"><strong style="color:#f1f5f9;">Interest:</strong> ${interest}<br /><strong style="color:#f1f5f9;">Fitness Level:</strong> ${fitnessLevel}${goalRace ? `<br /><strong style="color:#f1f5f9;">Goal Race:</strong> ${goalRace}` : ""}</p>
+      <p style="font-size:13px;margin:0;"><strong style="color:#f1f5f9;">Interest:</strong> ${s.interest}<br /><strong style="color:#f1f5f9;">Fitness Level:</strong> ${s.fitnessLevel}${goalRace ? `<br /><strong style="color:#f1f5f9;">Goal Race:</strong> ${s.goalRace}` : ""}</p>
     </div>
     <div class="footer">© ${new Date().getFullYear()} Tri IQ Coaching, LLC · <a href="https://triiqcoaching.com" style="color:#475569">triiqcoaching.com</a></div>
   </div>
@@ -141,7 +164,7 @@ export async function POST(request: NextRequest) {
       resend.emails.send({
         from: FROM,
         to: COACH_EMAIL,
-        subject: `New Coaching Inquiry: ${name} — ${interest}`,
+        subject: `New Coaching Inquiry: ${s.name} — ${s.interest}`,
         html: coachHtml,
         replyTo: email,
       }),

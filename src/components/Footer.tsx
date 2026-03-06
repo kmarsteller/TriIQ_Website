@@ -22,10 +22,10 @@ const footerNav = [
   {
     section: "Community",
     links: [
+      { href: "/events/indoor-training", label: "Indoor Training" },
+      { href: "/events/swim-clinic", label: "Swim Clinic" },
+      { href: "/events/im-oh-preview", label: "IMOH 70.3 Preview Ride" },
       { href: "/members#practices", label: "Group Practices" },
-      { href: "/members#calendar", label: "Race Calendar" },
-      { href: "/members#sponsors", label: "Partner Discounts" },
-      { href: "/members#gear", label: "Team Gear" },
     ],
   },
 ];
