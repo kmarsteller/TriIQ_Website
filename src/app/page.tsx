@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 const stats = [
   { value: 40, suffix: "+", label: "Years Combined Experience" },
-  { value: 37, suffix: "+", label: "Ironman Finishers Coached" },
+  { value: 25, suffix: "+", label: "Ironman Finishers Coached" },
   { value: 3, suffix: "", label: "Disciplines Mastered" },
   { value: 100, suffix: "%", label: "USAT Certified Coaches" },
 ];

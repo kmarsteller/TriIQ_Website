@@ -168,12 +168,12 @@ const partners: Partner[] = [
     logo: "/partners/ncm.png",
     category: "Local Partner",
     accent: {
-      text: "text-cyan-400",
+      text: "text-yellow-400",
       bg: "bg-cyan-500/8",
       border: "border-cyan-500/25",
-      badge: "bg-cyan-500",
+      badge: "bg-yellow-500",
       badgeText: "text-slate-950",
-      glow: "shadow-cyan-500/20",
+      glow: "shadow-yellow-500/20",
     },
   },
 ];
