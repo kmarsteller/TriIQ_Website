@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, FormEvent, Suspense } from "react";
-import { useRouter } from "next/navigation";
 import { Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 function LoginForm() {
-  const router = useRouter();
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -25,8 +23,7 @@ function LoginForm() {
       });
 
       if (res.ok) {
-        router.push("/members");
-        router.refresh();
+        window.location.href = "/members";
       } else {
         const data = await res.json();
         setError(data.error ?? "Invalid password. Please try again.");
