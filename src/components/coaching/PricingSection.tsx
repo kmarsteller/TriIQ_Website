@@ -251,7 +251,7 @@ export function PricingSection() {
                 <div className="grid grid-cols-3 text-[11px] font-bold uppercase tracking-wider">
                   <div className="px-5 py-3 text-slate-500 border-b border-slate-800">Feature</div>
                   <div className="px-5 py-3 text-cyan-400 bg-cyan-500/5 border-b border-cyan-500/20 text-center">Tri IQ</div>
-                  <div className="px-5 py-3 text-slate-500 border-b border-slate-800 text-center">Typical Coach</div>
+                  <div className="px-5 py-3 text-red-400/70 border-b border-slate-800 text-center">Typical Coach</div>
                 </div>
                 {compRows.map((row, i) => (
                   <motion.div
@@ -268,7 +268,7 @@ export function PricingSection() {
                       <span className="text-emerald-400 font-semibold">{row.triiq}</span>
                     </div>
                     <div className="px-5 py-3.5 text-center">
-                      <span className="text-slate-500">{row.comp}</span>
+                      <span className="text-red-400/80 font-semibold">{row.comp}</span>
                     </div>
                   </motion.div>
                 ))}
@@ -277,21 +277,6 @@ export function PricingSection() {
           )}
         </AnimatePresence>
 
-        {/* Footnotes */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={controls}
-          variants={{ visible: { opacity: 1, transition: { delay: 0.9 } } }}
-          className="text-center space-y-1"
-        >
-          <p className="text-slate-600 text-xs">
-            ¹ Setup fee waived for new athletes. &nbsp;² Six-month minimum engagement required.
-          </p>
-          <p className="text-slate-600 text-xs">
-            ³ Competitor pricing billed per 4-week cycle (13 payments/year). &nbsp;
-            ⁴ CISSN — Certified Sports Nutritionist &nbsp;⁵ MS, Applied Exercise Science &nbsp;⁶ RDN — Registered Dietitian Nutritionist
-          </p>
-        </motion.div>
       </div>
     </section>
   );

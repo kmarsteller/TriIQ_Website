@@ -115,7 +115,7 @@ export default function CoachingPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="pt-32 pb-20 md:pt-40 md:pb-24 hero-gradient relative overflow-hidden">
+      <section className="pt-32 pb-10 md:pt-40 md:pb-12 hero-gradient relative overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-50" />
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <AnimatedSection>
@@ -142,7 +142,7 @@ export default function CoachingPage() {
       </section>
 
       {/* Feature Sections */}
-      <section className="py-24 md:py-32">
+      <section className="pt-12 pb-24 md:pt-16 md:pb-32">
         <div className="max-w-7xl mx-auto px-6 space-y-28 md:space-y-36">
           {features.map((feature, i) => (
             <div
@@ -278,9 +278,10 @@ export default function CoachingPage() {
               </a>
               <a
                 href="mailto:coachkendra@triiqcoaching.com"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-slate-600 hover:border-cyan-500/50 text-slate-300 hover:text-white font-semibold rounded-full transition-all duration-200 hover:bg-slate-800/50"
+                className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-cyan-500/30 active:scale-95"
               >
                 Contact Coach Kendra
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
             <p className="text-slate-600 text-xs mt-6">
