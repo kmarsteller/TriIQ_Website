@@ -795,8 +795,16 @@ export default function MembersPage() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0 }}
-                      className="flex flex-col p-7 rounded-2xl border border-cyan-500/25 bg-cyan-500/5 bg-slate-900/60 hover:bg-slate-900/80 transition-all hover:shadow-xl hover:shadow-cyan-500/10"
+                      className="relative flex flex-col p-7 rounded-2xl border border-cyan-500/25 overflow-hidden transition-all hover:shadow-xl hover:shadow-cyan-500/10"
                     >
+                      {/* Tank background image */}
+                      <div
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: "url(/gear/squadlocker-tank-2026.png)" }}
+                      />
+                      <div className="absolute inset-0 bg-slate-950/80" />
+
+                      <div className="relative flex flex-col flex-1">
                       <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-white overflow-hidden mb-5">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src="/partners/squadlocker.png" alt="Squad Locker" width={56} height={56} className="object-contain" />
@@ -810,7 +818,7 @@ export default function MembersPage() {
                         Ships directly to you — no minimum order, no deadlines.
                       </p>
                       <a
-                        href="https://www.squadlocker.com"
+                        href="https://teamlocker.squadlocker.com/#/lockers/tri-iq"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl text-sm transition-all hover:shadow-lg hover:shadow-cyan-500/30 active:scale-[0.98]"
@@ -818,6 +826,7 @@ export default function MembersPage() {
                         Shop Squad Locker
                         <ExternalLink size={14} />
                       </a>
+                      </div>
                     </motion.div>
 
                     {/* Jakroo */}
