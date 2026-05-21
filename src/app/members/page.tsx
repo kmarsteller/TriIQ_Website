@@ -825,15 +825,24 @@ export default function MembersPage() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
-                      className="flex flex-col p-7 rounded-2xl border border-sky-500/25 bg-sky-500/5 bg-slate-900/60 hover:bg-slate-900/80 transition-all hover:shadow-xl hover:shadow-sky-500/10"
+                      className="relative flex flex-col p-7 rounded-2xl border border-sky-500/25 overflow-hidden transition-all hover:shadow-xl hover:shadow-sky-500/10"
                     >
+                      {/* Kit background image */}
+                      <div
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: "url(/gear/jakroo-kit-2026.jpg)" }}
+                      />
+                      <div className="absolute inset-0 bg-slate-950/80" />
+
+                      {/* Content (relative so it sits above the bg) */}
+                      <div className="relative flex flex-col flex-1">
                       <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-white overflow-hidden mb-5">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src="/partners/jakroo.svg" alt="Jakroo" width={48} height={48} className="object-contain" />
                       </div>
                       <h3 className="text-xl font-black text-white mb-1">Jakroo</h3>
                       <p className="text-sky-400 text-xs font-bold uppercase tracking-wider mb-3">
-                        Custom Team Kit
+                        2026 Custom Team Kit
                       </p>
                       <p className="text-slate-300 text-sm leading-relaxed mb-4 flex-1">
                         Order custom Tri IQ tri suits, jerseys, and cycling kits through
@@ -877,7 +886,7 @@ export default function MembersPage() {
                         </AnimatePresence>
                       </button>
                       <a
-                        href="https://www.jakroo.com"
+                        href="https://triiqcoaching.us21.list-manage.com/track/click?u=9ffef39d3b19b2d6f455f68a5&id=cdfca7b5b7&e=cbaef48485"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-sky-500/40 text-sky-400 hover:bg-sky-500/10 font-bold rounded-xl text-sm transition-all"
@@ -885,6 +894,7 @@ export default function MembersPage() {
                         Open Jakroo Store
                         <ExternalLink size={14} />
                       </a>
+                      </div>
                     </motion.div>
                   </div>
 
