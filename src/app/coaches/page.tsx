@@ -127,6 +127,17 @@ export default function CoachesPage() {
 
             return (
               <div key={coach.id} id={coach.id}>
+                {/* Header above cards */}
+                <AnimatedSection>
+                  <p className={`text-xs font-bold uppercase tracking-[0.3em] mb-3 text-center ${accent.text}`}>
+                    About
+                  </p>
+                  <h3 className="text-3xl md:text-4xl font-black text-white mb-2 leading-tight text-center">
+                    {coach.name}
+                  </h3>
+                  <p className="text-slate-500 font-medium mb-5 text-center">{coach.role}</p>
+                </AnimatedSection>
+
                 {/* Flip cards */}
                 <AnimatedSection>
                   <CoachFlipCards
@@ -140,14 +151,6 @@ export default function CoachesPage() {
 
                 {/* Bio + info below */}
                 <AnimatedSection direction="up" delay={0.1}>
-                  <p className={`text-xs font-bold uppercase tracking-[0.3em] mb-3 text-center ${accent.text}`}>
-                    About
-                  </p>
-                  <h3 className="text-3xl md:text-4xl font-black text-white mb-2 leading-tight text-center">
-                    {coach.name}
-                  </h3>
-                  <p className="text-slate-500 font-medium mb-8 text-center">{coach.role}</p>
-
                   <div className="space-y-4 mb-10">
                     {coach.bio.map((paragraph, pi) => (
                       <p key={pi} className="text-slate-300 leading-relaxed">
