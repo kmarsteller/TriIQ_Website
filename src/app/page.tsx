@@ -280,7 +280,7 @@ export default function HomePage() {
                   },
                   {
                     label: "Ironman Finishes",
-                    value: "9×",
+                    value: "10×",
                     desc: "Earned at the finish line",
                   },
                 ].map((item) => (

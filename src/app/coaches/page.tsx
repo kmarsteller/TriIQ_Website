@@ -51,7 +51,7 @@ const coaches = [
     imageSrc: "/coaches/pete.jpg",
     bio: [
       "Coach Peter Heizer is recognized by the US Olympic National Governing Body as a USAT Level 2 Certified Coach; he is an ESCI Certified Coach, an Ironman U Certified Coach, a Level 2 US Masters Swim Coach, and a TrainingPeaks Certified Coach.",
-      "With over 25 years of experience in endurance racing, he has a strong focus on long and ultra-distance competition. As a nine-time Ironman finisher, Coach Pete enjoys drawing on his personal experience to help his athletes achieve their best performance.",
+      "With over 40 years of experience in endurance racing, he has a strong focus on long and ultra-distance competition. As a nine-time Ironman finisher, Coach Pete enjoys drawing on his personal experience to help his athletes achieve their best performance.",
       "Coach Pete takes an athlete-first approach to training. He will work with you to identify your goals, outline priorities, and develop a training plan using training data and athlete feedback to develop evidence-based training that meets the unique goals of the individual.",
       "On recovery days, Coach Pete enjoys spending time creating music, traveling with his wife, and snuggling with his kitties.",
     ],
@@ -135,6 +135,8 @@ export default function CoachesPage() {
                     role={coach.role}
                     accentColor={coach.accentColor as "cyan" | "sky" | "teal"}
                     imageSrc={coach.imageSrc}
+                    photoScale={coach.photoScale}
+                    photoPosition={coach.photoPosition}
                   />
                 </AnimatedSection>
 
