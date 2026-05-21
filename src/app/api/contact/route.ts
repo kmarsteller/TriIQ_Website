@@ -96,6 +96,7 @@ export async function POST(request: NextRequest) {
 <body>
   <div class="wrapper">
     <div class="header">
+      <img src="https://triiqcoaching.com/triiq-logo.png" alt="Tri IQ Coaching" style="height:36px;width:auto;background:#fff;padding:4px 10px;border-radius:6px;display:block;margin-bottom:14px;" />
       <h1>🏊‍♂️ New Coaching Inquiry</h1>
       <p>Submitted via triiqcoaching.com</p>
     </div>
@@ -145,7 +146,9 @@ export async function POST(request: NextRequest) {
 <body>
   <div class="wrapper">
     <div class="card">
-      <div class="logo">Tri IQ</div>
+      <div style="margin-bottom:24px;">
+        <img src="https://triiqcoaching.com/triiq-logo.png" alt="Tri IQ Coaching" style="height:36px;width:auto;background:#fff;padding:4px 10px;border-radius:6px;display:block;" />
+      </div>
       <h2>We got your info, ${escapeHtml(name.split(" ")[0])}! 👋</h2>
       <p>Thanks for reaching out. Coach Pete will review your intake and get back to you within <span class="highlight">24–48 hours</span> to talk next steps.</p>
       <p>In the meantime, feel free to check out the <a href="https://triiqcoaching.com/coaching" style="color:#22d3ee">coaching services page</a> or <a href="https://triiqcoaching.com/coaches" style="color:#22d3ee">meet the coaches</a>.</p>

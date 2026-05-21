@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 
 const stats = [
   { value: 40, suffix: "+", label: "Years Combined Experience" },
-  { value: 25, suffix: "+", label: "Ironman Finishers Coached" },
-  { value: 50, suffix: "+", label: "70.3 Finishers Coached" },
+  { display: "Sprint to Ironman", label: "Distances Coached" },
+  { display: "Swim · Bike · Run", label: "Individual Endurance Events Coached" },
   { value: 100, suffix: "%", label: "USAT Certified Coaches" },
 ];
 
@@ -92,12 +92,18 @@ export default function HomePage() {
                 delay={i * 0.08}
                 className="text-center"
               >
-                <div className="text-4xl md:text-5xl font-black text-white mb-2">
-                  <AnimatedCounter
-                    to={stat.value}
-                    suffix={stat.suffix}
-                    duration={2}
-                  />
+                <div className="font-black text-white mb-2">
+                  {"display" in stat ? (
+                    <span className="text-2xl md:text-3xl">{stat.display}</span>
+                  ) : (
+                    <span className="text-4xl md:text-5xl">
+                      <AnimatedCounter
+                        to={stat.value}
+                        suffix={stat.suffix}
+                        duration={2}
+                      />
+                    </span>
+                  )}
                 </div>
                 <div className="text-slate-400 text-sm font-medium">
                   {stat.label}

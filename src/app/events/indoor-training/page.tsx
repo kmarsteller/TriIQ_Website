@@ -56,6 +56,7 @@ export default function IndoorTrainingPage() {
                   icon: <DiscordIcon className="w-5 h-5 text-cyan-400" />,
                   title: "Discord",
                   desc: "Free app + account. Available on any device.",
+                  href: "https://discord.com/download",
                 },
                 {
                   icon: <Bike size={20} className="text-cyan-400" />,
@@ -67,18 +68,35 @@ export default function IndoorTrainingPage() {
                   title: "Positive Attitude",
                   desc: "That's it. We'll handle the rest.",
                 },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className="flex flex-col items-center text-center p-5 rounded-xl bg-slate-800/50 border border-slate-700/40"
-                >
-                  <div className="inline-flex p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/25 mb-3">
-                    {item.icon}
+              ].map((item) => {
+                const inner = (
+                  <>
+                    <div className="inline-flex p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/25 mb-3">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-white font-bold text-sm mb-1">{item.title}</h3>
+                    <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
+                  </>
+                );
+                return item.href ? (
+                  <a
+                    key={item.title}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center text-center p-5 rounded-xl bg-slate-800/50 border border-slate-700/40 hover:border-cyan-500/40 hover:bg-slate-800/80 transition-all"
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <div
+                    key={item.title}
+                    className="flex flex-col items-center text-center p-5 rounded-xl bg-slate-800/50 border border-slate-700/40"
+                  >
+                    {inner}
                   </div>
-                  <h3 className="text-white font-bold text-sm mb-1">{item.title}</h3>
-                  <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 

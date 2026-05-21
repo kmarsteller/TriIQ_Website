@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { CoachOrbitCard } from "@/components/coaches/CoachOrbitCard";
+import { CoachFlipCards } from "@/components/coaches/CoachFlipCards";
 import { Mail, CheckCircle2, ArrowRight, Award } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -14,14 +14,14 @@ const coaches = [
   {
     id: "kendra",
     name: "Coach Kendra",
-    fullName: "Kendra Weekley",
+    fullName: "Kendra Kitson",
     role: "USAT Certified Triathlon Coach",
     email: "coachkendra@triiqcoaching.com",
     initials: "KW",
     accentColor: "cyan",
     imageSrc: "/coaches/kendra.jpg",
     bio: [
-      "USAT-certified triathlon coach Kendra Weekley started her journey into triathlon while obtaining her BS in Nutrition and Dietetics. She now practices as a Registered Dietitian with her MS in Exercise Science.",
+      "USAT-certified triathlon coach Kendra Kitson started her journey into triathlon while obtaining her BS in Nutrition and Dietetics. She now practices as a Registered Dietitian with her MS in Exercise Science.",
       "She loves coaching all distances, but has a true passion for short-course racing. Short-course triathlon has given her the opportunity to race for Team USA all over the world. Coach Kendra's favorite discipline is cycling — as you can see so much and go so far on a bike.",
       "A big accomplishment for Kendra was completing her own Tour de Cleveland 100-mile adventure. When she is not doing triathlon, Kendra likes to play soccer, sew and craft, and bake!",
     ],
@@ -50,7 +50,7 @@ const coaches = [
     accentColor: "sky",
     imageSrc: "/coaches/pete.jpg",
     bio: [
-      "Coach Peter Heizer is recognized by the US Olympic National Governing Body as a USA Triathlon Certified Coach; he is an Ironman Certified Coach, a U.S. Masters Swimming Certified Coach, and a TrainingPeaks Certified Coach.",
+      "Coach Peter Heizer is recognized by the US Olympic National Governing Body as a USAT Level 2 Certified Coach; he is an ESCI Certified Coach, an Ironman U Certified Coach, a Level 2 US Masters Swim Coach, and a TrainingPeaks Certified Coach.",
       "With over 25 years of experience in endurance racing, he has a strong focus on long and ultra-distance competition. As a nine-time Ironman finisher, Coach Pete enjoys drawing on his personal experience to help his athletes achieve their best performance.",
       "Coach Pete takes an athlete-first approach to training. He will work with you to identify your goals, outline priorities, and develop a training plan using training data and athlete feedback to develop evidence-based training that meets the unique goals of the individual.",
       "On recovery days, Coach Pete enjoys spending time creating music, traveling with his wife, and snuggling with his kitties.",
@@ -62,16 +62,16 @@ const coaches = [
       "Data-Driven Coaching",
     ],
     credentials: [
-      { label: "USA Triathlon Certified Coach", color: "cyan" },
-      { label: "Ironman Certified Coach", color: "sky" },
-      { label: "U.S. Masters Swimming Certified", color: "teal" },
-      { label: "TrainingPeaks Certified Coach", color: "cyan" },
-      { label: "9× Ironman Finisher", color: "sky" },
+      { label: "USAT Level 2 Certified Coach", color: "cyan" },
+      { label: "ESCI Certified Coach", color: "sky" },
+      { label: "Ironman U Certified Coach", color: "teal" },
+      { label: "Level 2 US Masters Swim Coach", color: "cyan" },
+      { label: "TrainingPeaks Certified Coach", color: "sky" },
     ],
     stats: [
       { label: "Ironman Finishes", value: "9×" },
       { label: "Years Racing", value: "40+" },
-      { label: "Certifications", value: "4" },
+      { label: "Certifications", value: "5" },
     ],
     usatUrl: "https://member.usatriathlon.org/coach/400",
   },
@@ -120,20 +120,20 @@ export default function CoachesPage() {
 
       {/* Coach Profiles */}
       <section className="pt-2 pb-10 md:pt-2 md:pb-16">
-        <div className="max-w-4xl mx-auto px-6 space-y-20 md:space-y-28">
+        <div className="max-w-6xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
           {coaches.map((coach) => {
             const accent = accentClasses[coach.accentColor];
 
             return (
               <div key={coach.id} id={coach.id}>
-                {/* Orbit visualization — full width, centered */}
-                <AnimatedSection className="-mt-12 -mb-10">
-                  <CoachOrbitCard
+                {/* Flip cards */}
+                <AnimatedSection>
+                  <CoachFlipCards
                     coachId={coach.id as "pete" | "kendra"}
-                    initials={coach.initials}
                     name={coach.name}
+                    role={coach.role}
                     accentColor={coach.accentColor as "cyan" | "sky" | "teal"}
-                    size={480}
                     imageSrc={coach.imageSrc}
                   />
                 </AnimatedSection>
@@ -215,10 +215,10 @@ export default function CoachesPage() {
                   </div>
 
                   {/* CTAs */}
-                  <div className="flex flex-col sm:flex-row gap-3 items-center">
+                  <div className="flex flex-col gap-2">
                     <a
                       href={`mailto:${coach.email}`}
-                      className={`group inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-slate-950 transition-all duration-200 hover:shadow-lg active:scale-95 ${
+                      className={`group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-slate-950 transition-all duration-200 hover:shadow-lg active:scale-95 ${
                         coach.accentColor === "cyan"
                           ? "bg-cyan-500 hover:bg-cyan-400 hover:shadow-cyan-500/30"
                           : "bg-sky-500 hover:bg-sky-400 hover:shadow-sky-500/30"
@@ -232,7 +232,7 @@ export default function CoachesPage() {
                     </a>
                     <a
                       href={`mailto:${coach.email}`}
-                      className={`flex items-center gap-2 px-5 py-3 rounded-full font-bold text-xs ${accent.bg} border ${accent.border} ${accent.text} hover:opacity-80 transition-opacity`}
+                      className={`flex items-center justify-center gap-2 px-5 py-3 rounded-full font-bold text-xs ${accent.bg} border ${accent.border} ${accent.text} hover:opacity-80 transition-opacity`}
                     >
                       <Mail size={13} />
                       {coach.email}
@@ -242,10 +242,9 @@ export default function CoachesPage() {
                         href={coach.usatUrl as string}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-5 py-3 rounded-full bg-slate-800/60 border border-slate-700/50 hover:border-cyan-500/40 transition-all"
+                        className="flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-slate-800/60 border border-slate-700/50 hover:border-cyan-500/40 transition-all"
                       >
-                        <span className="text-slate-300 font-bold text-xs">{coach.name}</span>
-                        <span className="text-slate-500 text-xs">@</span>
+                        <span className="text-slate-300 font-bold text-xs">View on</span>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src="/usat-main-logo.svg" alt="USA Triathlon" className="h-3.5 w-auto" />
                       </a>
@@ -255,6 +254,7 @@ export default function CoachesPage() {
               </div>
             );
           })}
+        </div>
         </div>
       </section>
 
