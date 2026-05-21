@@ -20,7 +20,6 @@ import {
   Bike,
   Timer,
   Star,
-  ChevronRight,
   ShieldCheck,
   Package,
   Lock,
@@ -558,16 +557,19 @@ export default function MembersPage() {
                   <div className="space-y-3">
                     {races.map((race, i) => {
                       const past = isRacePast(race.isoDate);
+                      const hasLink = race.url !== "#";
+                      const MotionEl = hasLink ? motion.a : motion.div;
+                      const linkProps = hasLink
+                        ? { href: race.url, target: "_blank", rel: "noopener noreferrer" }
+                        : {};
                       return (
-                      <motion.a
+                      <MotionEl
                         key={race.id}
-                        href={race.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        {...(linkProps as object)}
                         initial={{ opacity: 0, x: -16 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: i * 0.05 }}
-                        className={`group flex items-center gap-4 p-4 md:p-5 rounded-2xl border transition-all duration-200 relative overflow-hidden ${
+                        className={`flex items-center gap-4 p-4 md:p-5 rounded-2xl border transition-all duration-200 relative overflow-hidden ${hasLink ? "group cursor-pointer" : "cursor-default"} ${
                           past
                             ? "border-slate-700/30 bg-slate-950/40 opacity-60 hover:opacity-80"
                             : race.featured
@@ -629,12 +631,16 @@ export default function MembersPage() {
                           </div>
                         </div>
 
-                        {/* Arrow */}
-                        <ChevronRight
-                          size={16}
-                          className="text-slate-600 group-hover:text-cyan-400 group-hover:translate-x-0.5 transition-all shrink-0"
-                        />
-                      </motion.a>
+                        {/* Race site link indicator */}
+                        {hasLink ? (
+                          <div className="shrink-0 flex items-center gap-1 text-slate-600 group-hover:text-cyan-400 transition-colors">
+                            <span className="text-[10px] font-bold hidden sm:block leading-none">Race site</span>
+                            <ExternalLink size={13} />
+                          </div>
+                        ) : (
+                          <div className="shrink-0 w-[13px]" />
+                        )}
+                      </MotionEl>
                     );
                     })}
                   </div>
