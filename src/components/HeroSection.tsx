@@ -7,17 +7,17 @@ import { useState, useRef, useEffect, useCallback } from "react";
 
 const clips = [
   {
-    src: "https://videos.pexels.com/video-files/34088952/14458313_1920_1080_24fps.mp4",
+    src: "/swim.mp4",
     label: "Swim",
     icon: "🏊",
   },
   {
-    src: "https://videos.pexels.com/video-files/2066560/2066560-hd_1920_1080_30fps.mp4",
+    src: "/bike.mp4",
     label: "Bike",
     icon: "🚴",
   },
   {
-    src: "https://videos.pexels.com/video-files/3125907/3125907-hd_1920_1080_25fps.mp4",
+    src: "/run.mp4",
     label: "Run",
     icon: "🏃",
   },
