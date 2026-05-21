@@ -135,8 +135,6 @@ export default function CoachesPage() {
                     role={coach.role}
                     accentColor={coach.accentColor as "cyan" | "sky" | "teal"}
                     imageSrc={coach.imageSrc}
-                    photoScale={coach.photoScale}
-                    photoPosition={coach.photoPosition}
                   />
                 </AnimatedSection>
 
