@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { RaceCountdown } from "@/components/RaceCountdown";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRouter } from "next/navigation";
 import {
   Users,
@@ -391,6 +391,134 @@ const tabs = [
   { id: "gear", label: "Gear Store", icon: ShoppingBag },
 ];
 
+// ── Partner card with scroll-based glow on mobile ────────────────────────────
+
+function PartnerCard({
+  partner,
+  i,
+  copiedCode,
+  copyCode,
+}: {
+  partner: Partner;
+  i: number;
+  copiedCode: string | null;
+  copyCode: (code: string) => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0.65, once: false });
+
+  return (
+    <motion.div
+      ref={ref}
+      key={partner.id}
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: i * 0.08 }}
+      className={`relative flex flex-col p-6 rounded-2xl border ${partner.accent.border} ${partner.accent.bg} transition-all duration-300 group
+        ${inView ? `bg-slate-800/80 shadow-xl ${partner.accent.glow}` : "bg-slate-900/60"}
+        hover:bg-slate-800/80 hover:shadow-xl ${partner.accent.glow}`}
+    >
+      {/* Top row: category + discount badge */}
+      <div className="flex items-start justify-between gap-3 mb-4">
+        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] pt-0.5">
+          {partner.category}
+        </span>
+        {partner.discount && (
+          <span className={`shrink-0 px-2.5 py-1 rounded-lg text-xs font-black ${partner.accent.badge} ${partner.accent.badgeText} shadow-md`}>
+            {partner.discount}
+          </span>
+        )}
+      </div>
+
+      {/* Logo + brand name */}
+      <div className="flex items-center gap-3 mb-3">
+        <div className={`shrink-0 flex items-center justify-center w-12 h-12 rounded-xl border ${partner.accent.border} ${partner.logoBg ?? "bg-white/90"} overflow-hidden`}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={partner.logo ?? `https://www.google.com/s2/favicons?domain=${partner.domain}&sz=128`}
+            alt={`${partner.name} logo`}
+            width={40}
+            height={40}
+            className="object-contain"
+          />
+        </div>
+        <div>
+          <h3 className={`text-xl font-black leading-tight ${partner.accent.text}`}>
+            {partner.name}
+          </h3>
+          <p className="text-slate-400 text-xs font-medium">{partner.tagline}</p>
+        </div>
+      </div>
+
+      {/* Description */}
+      <p className="text-slate-300 text-sm leading-relaxed mb-5 flex-1">
+        {partner.description}
+      </p>
+
+      {/* Discount code chip */}
+      {partner.code ? (
+        <button
+          onClick={() => copyCode(partner.code!)}
+          className={`group/code w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl border ${partner.accent.border} bg-slate-950/60 hover:bg-slate-950/80 transition-all mb-4 cursor-pointer`}
+          title="Click to copy discount code"
+        >
+          <div className="flex items-center gap-2.5 min-w-0">
+            <Tag size={12} className={`${partner.accent.text} shrink-0`} />
+            <span className={`font-mono text-sm font-bold tracking-wider ${partner.accent.text} truncate`}>
+              {partner.code}
+            </span>
+          </div>
+          <AnimatePresence mode="wait">
+            {copiedCode === partner.code ? (
+              <motion.div
+                key="check"
+                initial={{ scale: 0.6, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.6, opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                className="shrink-0 flex items-center gap-1 text-emerald-400"
+              >
+                <Check size={14} />
+                <span className="text-xs font-bold">Copied!</span>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="copy"
+                initial={{ scale: 0.6, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.6, opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                className="shrink-0 text-slate-500 group-hover/code:text-slate-300 transition-colors"
+              >
+                <Copy size={14} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </button>
+      ) : (
+        <div className={`w-full flex items-center gap-2.5 px-4 py-3 rounded-xl border ${partner.accent.border} bg-slate-950/40 mb-4`}>
+          <ShieldCheck size={13} className={partner.accent.text} />
+          <span className="text-sm text-slate-400 font-medium">
+            Mention Tri IQ for member pricing
+          </span>
+        </div>
+      )}
+
+      {/* Visit site button */}
+      <a
+        href={partner.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-bold border ${partner.accent.border} ${partner.accent.text} hover:opacity-80 transition-opacity`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        Visit {partner.name}
+        <ExternalLink size={13} />
+      </a>
+    </motion.div>
+  );
+}
+
 // ── Main component ────────────────────────────────────────────────────────────
 
 export default function MembersPage() {
@@ -666,111 +794,13 @@ export default function MembersPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {partners.map((partner, i) => (
-                      <motion.div
+                      <PartnerCard
                         key={partner.id}
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.08 }}
-                        className={`relative flex flex-col p-6 rounded-2xl border ${partner.accent.border} ${partner.accent.bg} bg-slate-900/60 hover:bg-slate-900/80 transition-all duration-200 hover:shadow-xl ${partner.accent.glow} group`}
-                      >
-                        {/* Top row: category + discount badge */}
-                        <div className="flex items-start justify-between gap-3 mb-4">
-                          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] pt-0.5">
-                            {partner.category}
-                          </span>
-                          {partner.discount && (
-                            <span className={`shrink-0 px-2.5 py-1 rounded-lg text-xs font-black ${partner.accent.badge} ${partner.accent.badgeText} shadow-md`}>
-                              {partner.discount}
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Logo + brand name */}
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className={`shrink-0 flex items-center justify-center w-12 h-12 rounded-xl border ${partner.accent.border} ${partner.logoBg ?? "bg-white/90"} overflow-hidden`}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={partner.logo ?? `https://www.google.com/s2/favicons?domain=${partner.domain}&sz=128`}
-                              alt={`${partner.name} logo`}
-                              width={40}
-                              height={40}
-                              className="object-contain"
-                            />
-                          </div>
-                          <div>
-                            <h3 className={`text-xl font-black leading-tight ${partner.accent.text}`}>
-                              {partner.name}
-                            </h3>
-                            <p className="text-slate-400 text-xs font-medium">{partner.tagline}</p>
-                          </div>
-                        </div>
-
-                        {/* Description */}
-                        <p className="text-slate-300 text-sm leading-relaxed mb-5 flex-1">
-                          {partner.description}
-                        </p>
-
-                        {/* Discount code chip */}
-                        {partner.code ? (
-                          <button
-                            onClick={() => copyCode(partner.code!)}
-                            className={`group/code w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl border ${partner.accent.border} bg-slate-950/60 hover:bg-slate-950/80 transition-all mb-4 cursor-pointer`}
-                            title="Click to copy discount code"
-                          >
-                            <div className="flex items-center gap-2.5 min-w-0">
-                              <Tag size={12} className={`${partner.accent.text} shrink-0`} />
-                              <span className={`font-mono text-sm font-bold tracking-wider ${partner.accent.text} truncate`}>
-                                {partner.code}
-                              </span>
-                            </div>
-                            <AnimatePresence mode="wait">
-                              {copiedCode === partner.code ? (
-                                <motion.div
-                                  key="check"
-                                  initial={{ scale: 0.6, opacity: 0 }}
-                                  animate={{ scale: 1, opacity: 1 }}
-                                  exit={{ scale: 0.6, opacity: 0 }}
-                                  transition={{ duration: 0.15 }}
-                                  className="shrink-0 flex items-center gap-1 text-emerald-400"
-                                >
-                                  <Check size={14} />
-                                  <span className="text-xs font-bold">Copied!</span>
-                                </motion.div>
-                              ) : (
-                                <motion.div
-                                  key="copy"
-                                  initial={{ scale: 0.6, opacity: 0 }}
-                                  animate={{ scale: 1, opacity: 1 }}
-                                  exit={{ scale: 0.6, opacity: 0 }}
-                                  transition={{ duration: 0.15 }}
-                                  className="shrink-0 text-slate-500 group-hover/code:text-slate-300 transition-colors"
-                                >
-                                  <Copy size={14} />
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </button>
-                        ) : (
-                          <div className={`w-full flex items-center gap-2.5 px-4 py-3 rounded-xl border ${partner.accent.border} bg-slate-950/40 mb-4`}>
-                            <ShieldCheck size={13} className={partner.accent.text} />
-                            <span className="text-sm text-slate-400 font-medium">
-                              Mention Tri IQ for member pricing
-                            </span>
-                          </div>
-                        )}
-
-                        {/* Visit site button */}
-                        <a
-                          href={partner.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-bold border ${partner.accent.border} ${partner.accent.text} hover:opacity-80 transition-opacity`}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          Visit {partner.name}
-                          <ExternalLink size={13} />
-                        </a>
-                      </motion.div>
+                        partner={partner}
+                        i={i}
+                        copiedCode={copiedCode}
+                        copyCode={copyCode}
+                      />
                     ))}
                   </div>
                 </div>
