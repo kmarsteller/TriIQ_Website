@@ -26,6 +26,7 @@ const clips = [
 export function HeroSection() {
   const [clipIdx, setClipIdx] = useState(0);
   const [fading, setFading] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -62,7 +63,10 @@ export function HeroSection() {
         muted
         playsInline
         onEnded={handleEnded}
-        className="absolute inset-0 w-full h-full object-cover"
+        onCanPlay={() => setVideoReady(true)}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1400ms] ease-in ${
+          videoReady ? "opacity-100" : "opacity-0"
+        }`}
       />
 
       {/* Fade-transition overlay (darkens between clips) */}
