@@ -190,6 +190,7 @@ interface Race {
   distances: string[];
   url: string;
   featured?: boolean;
+  tag?: string;     // e.g. "TRAINING" — shown as a hot-pink badge
 }
 
 function isRacePast(isoDate: string): boolean {
@@ -243,6 +244,18 @@ const races: Race[] = [
     location: "Rockford, IL",
     distances: ["70.3"],
     url: "https://www.ironman.com/races/im703-rockford-illinois",
+  },
+  {
+    id: "imoh-preview",
+    name: "IRONMAN Ohio 70.3 Preview Ride",
+    date: "Jun 20",
+    month: "JUN",
+    day: "Sat",
+    isoDate: "2026-06-20",
+    location: "Sandusky, OH",
+    distances: ["Ride"],
+    url: "/events/im-oh-preview",
+    tag: "TRAINING",
   },
   {
     id: "imoh",
@@ -380,6 +393,8 @@ const distanceBadge: Record<string, string> = {
   Olympic: "bg-cyan-500/15 text-cyan-400 border-cyan-500/25",
   "70.3": "bg-sky-500/15 text-sky-400 border-sky-500/25",
   Full: "bg-violet-500/15 text-violet-400 border-violet-500/25",
+  Ride: "bg-fuchsia-500/15 text-fuchsia-400 border-fuchsia-500/25",
+  Run: "bg-orange-500/15 text-orange-400 border-orange-500/25",
 };
 
 // ── Tab config ────────────────────────────────────────────────────────────────
@@ -686,9 +701,12 @@ export default function MembersPage() {
                     {races.map((race, i) => {
                       const past = isRacePast(race.isoDate);
                       const hasLink = race.url !== "#";
+                      const isInternal = race.url.startsWith("/");
                       const MotionEl = hasLink ? motion.a : motion.div;
                       const linkProps = hasLink
-                        ? { href: race.url, target: "_blank", rel: "noopener noreferrer" }
+                        ? isInternal
+                          ? { href: race.url }
+                          : { href: race.url, target: "_blank", rel: "noopener noreferrer" }
                         : {};
                       return (
                       <MotionEl
@@ -736,6 +754,11 @@ export default function MembersPage() {
                                 ✓ Done
                               </span>
                             )}
+                            {!past && race.tag && (
+                              <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-pink-500/15 border border-pink-500/30 text-pink-400 text-[9px] font-bold uppercase tracking-wider">
+                                {race.tag}
+                              </span>
+                            )}
                             {!past && race.featured && (
                               <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-500/25 text-cyan-400 text-[9px] font-bold uppercase tracking-wider">
                                 <Star size={7} fill="currentColor" />
@@ -759,10 +782,12 @@ export default function MembersPage() {
                           </div>
                         </div>
 
-                        {/* Race site link indicator */}
+                        {/* Race site / details link indicator */}
                         {hasLink ? (
                           <div className="shrink-0 flex items-center gap-1 text-slate-600 group-hover:text-cyan-400 transition-colors">
-                            <span className="text-[10px] font-bold hidden sm:block leading-none">Race site</span>
+                            <span className="text-[10px] font-bold hidden sm:block leading-none">
+                              {isInternal ? "Details" : "Race site"}
+                            </span>
                             <ExternalLink size={13} />
                           </div>
                         ) : (
