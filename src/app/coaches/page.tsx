@@ -219,8 +219,8 @@ export default function CoachesPage() {
 
                   {/* CTAs */}
                   <div className="flex flex-col gap-2">
-                    <a
-                      href={`mailto:${coach.email}`}
+                    <Link
+                      href={`/contact?coach=${coach.id}`}
                       className={`group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-slate-950 transition-all duration-200 hover:shadow-lg active:scale-95 ${
                         coach.accentColor === "cyan"
                           ? "bg-cyan-500 hover:bg-cyan-400 hover:shadow-cyan-500/30"
@@ -232,7 +232,7 @@ export default function CoachesPage() {
                         size={15}
                         className="group-hover:translate-x-1 transition-transform"
                       />
-                    </a>
+                    </Link>
                     <a
                       href={`mailto:${coach.email}`}
                       className={`flex items-center justify-center gap-2 px-5 py-3 rounded-full font-bold text-xs ${accent.bg} border ${accent.border} ${accent.text} hover:opacity-80 transition-opacity`}

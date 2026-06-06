@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   User,
@@ -79,8 +80,14 @@ const inputErrorClass =
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export default function ContactPage() {
-  const [form, setForm] = useState<FormData>(INITIAL);
+function ContactForm() {
+  const searchParams = useSearchParams();
+  const coachParam = searchParams.get("coach");
+  const initialNotes =
+    coachParam === "kendra" ? "I am interested in Coach Kendra" :
+    coachParam === "pete"   ? "I am interested in Coach Pete"   : "";
+
+  const [form, setForm] = useState<FormData>({ ...INITIAL, notes: initialNotes });
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -389,5 +396,13 @@ export default function ContactPage() {
         </div>
       </section>
     </>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense>
+      <ContactForm />
+    </Suspense>
   );
 }
