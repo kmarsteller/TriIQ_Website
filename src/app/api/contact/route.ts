@@ -91,12 +91,18 @@ export async function POST(request: NextRequest) {
     td:last-child { color: #f1f5f9; }
     .notes { background: #0f172a; border-radius: 8px; padding: 14px; font-size: 14px; color: #cbd5e1; margin-top: 16px; white-space: pre-wrap; }
     .footer { text-align: center; padding: 20px 0 0; color: #475569; font-size: 12px; }
+    .logo-dark { display: none; }
+    @media (prefers-color-scheme: dark) {
+      .logo-light { display: none !important; }
+      .logo-dark { display: block !important; }
+    }
   </style>
 </head>
 <body>
   <div class="wrapper">
     <div class="header">
-      <img src="https://triiqcoaching.com/triiq-logo.png" alt="Tri IQ Coaching" style="height:36px;width:auto;background:#fff;padding:4px 10px;border-radius:6px;display:block;margin-bottom:14px;" />
+      <img src="https://triiqcoaching.com/triiq-logo.png" alt="Tri IQ Coaching" class="logo-light" style="height:36px;width:auto;background:#fff;padding:4px 10px;border-radius:6px;display:block;margin-bottom:14px;" />
+      <img src="https://triiqcoaching.com/triiq-logo-reversed.png" alt="Tri IQ Coaching" class="logo-dark" style="height:36px;width:auto;display:none;margin-bottom:14px;" />
       <h1>🏊‍♂️ New Coaching Inquiry</h1>
       <p>Submitted via triiqcoaching.com</p>
     </div>
@@ -141,13 +147,19 @@ export async function POST(request: NextRequest) {
     .divider { border: none; border-top: 1px solid #334155; margin: 24px 0; }
     .cta { display: inline-block; background: #0e7490; color: #fff !important; font-weight: 700; font-size: 14px; padding: 12px 28px; border-radius: 50px; text-decoration: none; }
     .footer { text-align: center; padding: 24px 0 0; color: #475569; font-size: 12px; }
+    .logo-dark { display: none; }
+    @media (prefers-color-scheme: dark) {
+      .logo-light { display: none !important; }
+      .logo-dark { display: block !important; }
+    }
   </style>
 </head>
 <body>
   <div class="wrapper">
     <div class="card">
       <div style="margin-bottom:24px;">
-        <img src="https://triiqcoaching.com/triiq-logo.png" alt="Tri IQ Coaching" style="height:36px;width:auto;background:#fff;padding:4px 10px;border-radius:6px;display:block;" />
+        <img src="https://triiqcoaching.com/triiq-logo.png" alt="Tri IQ Coaching" class="logo-light" style="height:36px;width:auto;background:#fff;padding:4px 10px;border-radius:6px;display:block;" />
+        <img src="https://triiqcoaching.com/triiq-logo-reversed.png" alt="Tri IQ Coaching" class="logo-dark" style="height:36px;width:auto;display:none;" />
       </div>
       <h2>We got your info, ${escapeHtml(name.split(" ")[0])}! 👋</h2>
       <p>Thanks for reaching out. Coach Pete will review your intake and get back to you within <span class="highlight">24–48 hours</span> to talk next steps.</p>
