@@ -30,7 +30,8 @@ export default function ImOhPreviewPage() {
             <span className="text-cyan-400 text-xs font-bold uppercase tracking-[0.2em]">Course Preview</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
-            IRONMAN Ohio 70.3{" "}
+            IRONMAN Ohio 70.3
+            <br />
             <span className="text-cyan-400">Preview Ride</span>
           </h1>
           <p className="text-slate-400 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
