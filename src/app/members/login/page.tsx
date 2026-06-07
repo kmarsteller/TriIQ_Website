@@ -2,7 +2,6 @@
 
 import { useState, FormEvent, Suspense } from "react";
 import { Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 function LoginForm() {
   const [password, setPassword] = useState("");
@@ -38,21 +37,6 @@ function LoginForm() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 hero-gradient relative overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-40" />
-
-      {/* Logo / back to home */}
-      <Link
-        href="/"
-        className="absolute top-6 left-6 flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
-        aria-label="Back to Tri IQ home"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/triiq-logo.png"
-          alt="Tri IQ"
-          className="h-7 w-auto"
-          style={{ filter: "invert(1) hue-rotate(180deg)" }}
-        />
-      </Link>
 
       <div className="relative w-full max-w-md">
         <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 md:p-10 shadow-2xl shadow-black/50">
