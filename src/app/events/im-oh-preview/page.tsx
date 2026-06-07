@@ -9,6 +9,7 @@ import {
   Route,
   Flag,
   Clock,
+  ClipboardList,
 } from "lucide-react";
 
 export const metadata = {
@@ -123,20 +124,73 @@ export default function ImOhPreviewPage() {
                 are welcome.
               </p>
             </div>
+            <div className="flex items-start gap-3 mt-5 p-4 rounded-xl bg-amber-500/10 border border-amber-500/25">
+              <span className="shrink-0 mt-0.5 inline-flex items-center px-2 py-0.5 rounded-md bg-amber-500/20 border border-amber-500/40 text-amber-400 text-[10px] font-bold uppercase tracking-wider">
+                Important
+              </span>
+              <p className="text-slate-300 text-sm leading-relaxed">
+                We meet at 7 AM for pre-ride instructions and safety briefing. We
+                start riding at 7:30 sharp. There are several Facebook groups that
+                are active with pre-ride information.
+              </p>
+            </div>
+          </div>
+
+          {/* ── Registration ── */}
+          <div className="p-5 rounded-2xl border border-slate-700/60 bg-slate-900/60 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="shrink-0 p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/25">
+              <ClipboardList size={18} className="text-cyan-400" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-white font-bold text-sm mb-1">Registration</h3>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Reserve your spot for the Tri IQ preview ride — space is limited.
+              </p>
+            </div>
+            <a
+              href="https://register.hakuapp.com/?event=6d60fe409331ef753a3b"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-full text-sm transition-all hover:shadow-lg hover:shadow-cyan-500/30 active:scale-95"
+            >
+              Register
+              <ExternalLink size={13} />
+            </a>
           </div>
 
           {/* ── Location ── */}
-          <div className="p-5 rounded-2xl border border-slate-700/60 bg-slate-900/60 flex items-start gap-4">
-            <div className="shrink-0 p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/25">
-              <MapPin size={18} className="text-cyan-400" />
-            </div>
-            <div>
-              <h3 className="text-white font-bold text-sm mb-1">Location</h3>
-              <p className="text-slate-300 text-sm">Sandusky, Ohio</p>
-              <p className="text-slate-500 text-xs mt-0.5">
-                Start / finish location and logistics communicated to registered riders via Discord
-              </p>
-            </div>
+          <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 overflow-hidden">
+            <a
+              href="https://www.google.com/maps/place/Paper+District+Marina+Parking/@41.4563557,-82.7175847,19z/data=!4m6!3m5!1s0x883a45005d1fd637:0x2eaaca9db032ce3e!8m2!3d41.4567524!4d-82.7168608!16s%2Fg%2F11xspcdlhq?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-5 flex items-start gap-4 group hover:bg-slate-800/40 transition-colors"
+            >
+              <div className="shrink-0 p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/25">
+                <MapPin size={18} className="text-cyan-400" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-white font-bold text-sm mb-1 group-hover:text-cyan-400 transition-colors">
+                  Paper District Marina Parking
+                </h3>
+                <p className="text-slate-300 text-sm">
+                  This is the ride start/stop location which is the Ironman OH 70.3 transition area.
+                </p>
+                <p className="text-slate-500 text-xs mt-1 inline-flex items-center gap-1">
+                  Sandusky, Ohio · Open in Google Maps
+                  <ExternalLink size={11} className="shrink-0" />
+                </p>
+              </div>
+            </a>
+            <iframe
+              src="https://www.google.com/maps?q=Paper+District+Marina+Parking,+Sandusky,+OH&output=embed"
+              width="100%"
+              height="220"
+              style={{ border: 0, display: "block" }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Map of Paper District Marina Parking — ride start/finish location"
+            />
           </div>
 
           {/* ── Course Downloads ── */}
@@ -212,7 +266,6 @@ export default function ImOhPreviewPage() {
                 "Nutrition for a full race-sim effort",
                 "Flat kit: tube, CO₂ or pump, tire levers",
                 "Sunscreen and race-day kit",
-                "Join the Tri IQ Discord for ride-day logistics",
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3 text-sm text-slate-300">
                   <CheckCircle2 size={15} className="text-cyan-400 shrink-0" />
@@ -231,8 +284,7 @@ export default function ImOhPreviewPage() {
               <p className="text-amber-400 font-bold text-sm mb-1">Plan for race-pace conditions</p>
               <p className="text-slate-400 text-xs leading-relaxed">
                 Ohio summer mornings heat up fast. Plan your start time to finish before peak
-                afternoon temperatures. Coaches recommend a 7–8 AM roll-out — final time will
-                be confirmed in Discord.
+                afternoon temperatures. We&apos;ll roll out at 7:30 AM sharp.
               </p>
             </div>
           </div>
