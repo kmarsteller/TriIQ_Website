@@ -10,6 +10,9 @@ import {
   Flag,
   Clock,
   ClipboardList,
+  Info,
+  ClipboardCheck,
+  HelpCircle,
 } from "lucide-react";
 
 export const metadata = {
@@ -106,7 +109,10 @@ export default function ImOhPreviewPage() {
 
           {/* ── About the Ride ── */}
           <div className="p-6 md:p-8 rounded-2xl border border-slate-700/60 bg-slate-900/60">
-            <h2 className="text-xl font-black text-white mb-4">About the Preview Ride</h2>
+            <div className="flex items-center gap-2 mb-4">
+              <Info size={18} className="text-cyan-400" />
+              <h2 className="text-xl font-black text-white">About the Preview Ride</h2>
+            </div>
             <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
               <p>
                 Racing IRONMAN Ohio 70.3 without knowing the course is leaving time
@@ -138,25 +144,25 @@ export default function ImOhPreviewPage() {
           </div>
 
           {/* ── Registration ── */}
-          <div className="p-5 rounded-2xl border border-slate-700/60 bg-slate-900/60 flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="shrink-0 p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/25">
+          <div className="p-5 md:p-6 rounded-2xl border border-slate-700/60 bg-slate-900/60">
+            <div className="flex items-center gap-2 mb-3">
               <ClipboardList size={18} className="text-cyan-400" />
+              <h2 className="text-xl font-black text-white">Registration</h2>
             </div>
-            <div className="flex-1">
-              <h3 className="text-white font-bold text-sm mb-1">Registration</h3>
-              <p className="text-slate-400 text-xs leading-relaxed">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <p className="flex-1 text-slate-400 text-sm leading-relaxed">
                 Reserve your spot for the Tri IQ preview ride — space is limited.
               </p>
+              <a
+                href="https://register.hakuapp.com/?event=6d60fe409331ef753a3b"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-full text-sm transition-all hover:shadow-lg hover:shadow-cyan-500/30 active:scale-95"
+              >
+                Register
+                <ExternalLink size={13} />
+              </a>
             </div>
-            <a
-              href="https://register.hakuapp.com/?event=6d60fe409331ef753a3b"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-full text-sm transition-all hover:shadow-lg hover:shadow-cyan-500/30 active:scale-95"
-            >
-              Register
-              <ExternalLink size={13} />
-            </a>
           </div>
 
           {/* ── Location ── */}
@@ -165,23 +171,22 @@ export default function ImOhPreviewPage() {
               href="https://www.google.com/maps/place/Paper+District+Marina+Parking/@41.4563557,-82.7175847,19z/data=!4m6!3m5!1s0x883a45005d1fd637:0x2eaaca9db032ce3e!8m2!3d41.4567524!4d-82.7168608!16s%2Fg%2F11xspcdlhq?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-5 flex items-start gap-4 group hover:bg-slate-800/40 transition-colors"
+              className="p-5 md:p-6 block group hover:bg-slate-800/40 transition-colors"
             >
-              <div className="shrink-0 p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/25">
+              <div className="flex items-center gap-2 mb-3">
                 <MapPin size={18} className="text-cyan-400" />
+                <h2 className="text-xl font-black text-white group-hover:text-cyan-400 transition-colors">
+                  Location
+                </h2>
               </div>
-              <div className="flex-1">
-                <h3 className="text-white font-bold text-sm mb-1 group-hover:text-cyan-400 transition-colors">
-                  Paper District Marina Parking
-                </h3>
-                <p className="text-slate-300 text-sm">
-                  This is the ride start/stop location which is the Ironman OH 70.3 transition area.
-                </p>
-                <p className="text-slate-500 text-xs mt-1 inline-flex items-center gap-1">
-                  Sandusky, Ohio · Open in Google Maps
-                  <ExternalLink size={11} className="shrink-0" />
-                </p>
-              </div>
+              <p className="text-white font-bold text-sm mb-1">Paper District Marina Parking</p>
+              <p className="text-slate-300 text-sm">
+                This is the ride start/stop location which is the Ironman OH 70.3 transition area.
+              </p>
+              <p className="text-slate-500 text-xs mt-1 inline-flex items-center gap-1">
+                Sandusky, Ohio · Open in Google Maps
+                <ExternalLink size={11} className="shrink-0" />
+              </p>
             </a>
             <iframe
               src="https://www.google.com/maps?q=Paper+District+Marina+Parking,+Sandusky,+OH&output=embed"
@@ -195,8 +200,8 @@ export default function ImOhPreviewPage() {
           </div>
 
           {/* ── Course Downloads ── */}
-          <div>
-            <div className="flex items-center gap-2 mb-6">
+          <div className="p-6 md:p-8 rounded-2xl border border-slate-700/40 bg-slate-900/30">
+            <div className="flex items-center gap-2 mb-4">
               <Download size={18} className="text-cyan-400" />
               <h2 className="text-xl font-black text-white">Course Files</h2>
             </div>
@@ -257,7 +262,10 @@ export default function ImOhPreviewPage() {
 
           {/* ── What to Bring ── */}
           <div className="p-6 rounded-2xl border border-slate-700/40 bg-slate-900/30">
-            <h2 className="text-base font-black text-white mb-4">Ride day checklist</h2>
+            <div className="flex items-center gap-2 mb-4">
+              <ClipboardCheck size={18} className="text-cyan-400" />
+              <h2 className="text-xl font-black text-white">Ride day checklist</h2>
+            </div>
             <ul className="space-y-2.5">
               {[
                 "Helmet (required — no exceptions)",
@@ -292,7 +300,10 @@ export default function ImOhPreviewPage() {
 
           {/* ── Contact / CTA ── */}
           <div className="p-6 md:p-8 rounded-2xl border border-cyan-500/20 bg-cyan-500/5">
-            <h2 className="text-lg font-black text-white mb-2">Questions?</h2>
+            <div className="flex items-center gap-2 mb-2">
+              <HelpCircle size={18} className="text-cyan-400" />
+              <h2 className="text-xl font-black text-white">Questions?</h2>
+            </div>
             <p className="text-slate-400 text-sm mb-5">
               Drop a message to your coach or use the contact form and we&apos;ll be in touch within 24–48 hours.
             </p>
