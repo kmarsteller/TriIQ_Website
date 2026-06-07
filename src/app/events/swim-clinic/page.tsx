@@ -188,10 +188,10 @@ export default function SwimClinicPage() {
 
           <div className="text-center pt-2">
             <Link
-              href="/contact"
+              href="/contact/question?topic=TriCLE+Swim+Clinic"
               className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-full text-sm transition-all hover:shadow-lg hover:shadow-cyan-500/30 active:scale-95"
             >
-              Contact a Coach
+              Ask a Question
               <ChevronRight size={14} />
             </Link>
           </div>
