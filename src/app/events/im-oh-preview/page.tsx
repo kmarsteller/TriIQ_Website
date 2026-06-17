@@ -242,7 +242,7 @@ export default function ImOhPreviewPage() {
                     <div className="flex items-center gap-2 mb-0.5">
                       <p className="text-white font-bold text-sm">Download GPX</p>
                       <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wide">
-                        Updated Jun 17
+                        Updated Jun 17, 2026
                       </span>
                     </div>
                     <p className="text-slate-500 text-xs">Universal GPS format</p>
@@ -261,7 +261,7 @@ export default function ImOhPreviewPage() {
                     <div className="flex items-center gap-2 mb-0.5">
                       <p className="text-white font-bold text-sm">Turn-by-Turn PDF</p>
                       <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wide">
-                        Updated Jun 17
+                        Updated Jun 17, 2026
                       </span>
                     </div>
                     <p className="text-slate-500 text-xs">Printable directions</p>
