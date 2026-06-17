@@ -211,14 +211,19 @@ export default function ImOhPreviewPage() {
               {/* RideWithGPS */}
               <div className="p-5 rounded-2xl border border-slate-700/60 bg-slate-900/60 flex flex-col sm:flex-row sm:items-center gap-4">
                 <div className="flex-1">
-                  <h3 className="text-white font-bold text-sm mb-1">View on RideWithGPS</h3>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="text-white font-bold text-sm">View on RideWithGPS</h3>
+                    <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wide">
+                      Updated Jun 17, 2026
+                    </span>
+                  </div>
                   <p className="text-slate-400 text-xs leading-relaxed">
                     Interactive map, elevation profile, and turn-by-turn cues.
                     Great for scouting the route on any device.
                   </p>
                 </div>
                 <a
-                  href="https://ridewithgps.com/routes/43627172"
+                  href="https://ridewithgps.com/routes/55699269"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-full text-sm transition-all hover:shadow-lg hover:shadow-cyan-500/30 active:scale-95"
