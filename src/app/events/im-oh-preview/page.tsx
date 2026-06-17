@@ -13,6 +13,7 @@ import {
   Info,
   ClipboardCheck,
   HelpCircle,
+  FileText,
 } from "lucide-react";
 
 export const metadata = {
@@ -230,20 +231,6 @@ export default function ImOhPreviewPage() {
               {/* File downloads row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <a
-                  href="/routes/imoh-70-3-bike-course.tcx"
-                  download
-                  className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/40 hover:border-cyan-500/40 transition-all group"
-                >
-                  <div className="shrink-0 p-2.5 rounded-lg bg-slate-700/60 group-hover:bg-cyan-500/10 border border-slate-600/40 group-hover:border-cyan-500/25 transition-all">
-                    <Download size={15} className="text-slate-400 group-hover:text-cyan-400 transition-colors" />
-                  </div>
-                  <div>
-                    <p className="text-white font-bold text-sm">Download TCX</p>
-                    <p className="text-slate-500 text-xs">Garmin / Wahoo compatible</p>
-                  </div>
-                </a>
-
-                <a
                   href="/routes/imoh-70-3-bike-course.gpx"
                   download
                   className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/40 hover:border-cyan-500/40 transition-all group"
@@ -252,8 +239,32 @@ export default function ImOhPreviewPage() {
                     <Download size={15} className="text-slate-400 group-hover:text-cyan-400 transition-colors" />
                   </div>
                   <div>
-                    <p className="text-white font-bold text-sm">Download GPX</p>
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <p className="text-white font-bold text-sm">Download GPX</p>
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wide">
+                        Updated Jun 17
+                      </span>
+                    </div>
                     <p className="text-slate-500 text-xs">Universal GPS format</p>
+                  </div>
+                </a>
+
+                <a
+                  href="/routes/imoh-70-3-bike-course-turn-by-turn.pdf"
+                  download
+                  className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/40 hover:border-cyan-500/40 transition-all group"
+                >
+                  <div className="shrink-0 p-2.5 rounded-lg bg-slate-700/60 group-hover:bg-cyan-500/10 border border-slate-600/40 group-hover:border-cyan-500/25 transition-all">
+                    <FileText size={15} className="text-slate-400 group-hover:text-cyan-400 transition-colors" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <p className="text-white font-bold text-sm">Turn-by-Turn PDF</p>
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wide">
+                        Updated Jun 17
+                      </span>
+                    </div>
+                    <p className="text-slate-500 text-xs">Printable directions</p>
                   </div>
                 </a>
               </div>
