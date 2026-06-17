@@ -212,6 +212,7 @@ export default function ImOhPreviewPage() {
               <div className="p-5 rounded-2xl border border-slate-700/60 bg-slate-900/60 flex flex-col sm:flex-row sm:items-center gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
+                    <img src="/rwgps-icon.png" alt="" aria-hidden="true" width={16} height={16} />
                     <h3 className="text-white font-bold text-sm">View on RideWithGPS</h3>
                     <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wide">
                       Updated Jun 17, 2026
@@ -224,6 +225,33 @@ export default function ImOhPreviewPage() {
                 </div>
                 <a
                   href="https://ridewithgps.com/routes/55699269"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-full text-sm transition-all hover:shadow-lg hover:shadow-cyan-500/30 active:scale-95"
+                >
+                  Open Route
+                  <ExternalLink size={13} />
+                </a>
+              </div>
+
+              {/* Garmin Connect */}
+              <div className="p-5 rounded-2xl border border-slate-700/60 bg-slate-900/60 flex flex-col sm:flex-row sm:items-center gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <img src="/garmin-icon.png" alt="" aria-hidden="true" width={16} height={16} style={{ filter: "invert(1)", opacity: 0.85 }} />
+                    <h3 className="text-white font-bold text-sm">View on Garmin Connect</h3>
+                    <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wide">
+                      Updated Jun 17, 2026
+                    </span>
+                  </div>
+                  <p className="text-slate-500 text-xs mb-1">(login required)</p>
+                  <p className="text-slate-400 text-xs leading-relaxed">
+                    Send the course directly to your Garmin bike computer with one tap.
+                    No file downloads or manual transfers needed.
+                  </p>
+                </div>
+                <a
+                  href="https://connect.garmin.com/app/course/476240658"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-full text-sm transition-all hover:shadow-lg hover:shadow-cyan-500/30 active:scale-95"
