@@ -244,10 +244,9 @@ export default function ImOhPreviewPage() {
                       Updated Jun 17, 2026
                     </span>
                   </div>
-                  <p className="text-slate-500 text-xs mb-1">(login required)</p>
                   <p className="text-slate-400 text-xs leading-relaxed">
                     Send the course directly to your Garmin bike computer with one tap.
-                    No file downloads or manual transfers needed.
+                    No file downloads or manual transfers needed. <span className="text-slate-500">(login required)</span>
                   </p>
                 </div>
                 <a
