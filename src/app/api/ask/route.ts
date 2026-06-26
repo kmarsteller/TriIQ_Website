@@ -20,13 +20,20 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    const { name, email, phone, topic, question } = body as {
+    const { name, email, phone, topic, question, company } = body as {
       name?: string;
       email?: string;
       phone?: string;
       topic?: string;
       question?: string;
+      company?: string;
     };
+
+    // Honeypot — bots fill every field, real users never see this one.
+    // Pretend success so bots don't know to adjust their behavior.
+    if (company?.trim()) {
+      return NextResponse.json({ success: true });
+    }
 
     // Validate required fields
     if (!name?.trim() || !email?.trim() || !question?.trim()) {

@@ -23,6 +23,7 @@ interface FormData {
   phone: string;
   topic: string;
   question: string;
+  company: string;
 }
 
 interface FormErrors {
@@ -71,6 +72,7 @@ function QuestionForm() {
     phone: "",
     topic: topicParam,
     question: "",
+    company: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
@@ -188,6 +190,23 @@ function QuestionForm() {
                 className="space-y-6"
                 noValidate
               >
+                {/* Honeypot — hidden from real users, catches simple bots */}
+                <div
+                  style={{ position: "absolute", left: "-9999px", top: "-9999px", height: 0, width: 0, overflow: "hidden" }}
+                  aria-hidden="true"
+                >
+                  <label htmlFor="company">Company</label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.company}
+                    onChange={(e) => set("company", e.target.value)}
+                  />
+                </div>
+
                 {/* Name + Email */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <InputWrapper error={errors.name}>
