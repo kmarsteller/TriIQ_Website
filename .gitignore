@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local source video files (too large for git)
+source-video/
+public/bike_original.mp4
